@@ -9,10 +9,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true,
-    https: {
-      key: './scripts/tls-dev/private.key',
-      cert: './scripts/tls-dev/certificate.crt'
-    }
+    open: false,
+    host: '0.0.0.0',
   }
 })

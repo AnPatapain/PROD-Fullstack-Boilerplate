@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  nontion-app-dev:
+    container_name: nontion-app-dev
+    image: node:18.18-alpine
+    volumes:
+      - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
+
+    command: sh -c "cd ${ROOT_PROJECT} && ${DOCKER_APP_CMD}"
+    ports:
+      - "3000:3000"
+    user: "${DOCKER_UID}:${DOCKER_UID}"
+    privileged: true
+
+  nginx-reverse-proxy-dev:
+    container_name: nginx-reverse-proxy-dev
+    image: nginx:alpine
+    volumes:
+      - ../nginx:/etc/nginx/conf.d
+      - ./tls-dev:/etc/nginx/certs
+    ports:
+     - "443:443"
+     - "80:80"
+    depends_on:
+      - nontion-app-dev
