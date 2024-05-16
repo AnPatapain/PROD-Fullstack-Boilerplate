@@ -1,32 +1,16 @@
-# Using a multi-stage build process
+
 FROM node:18.18-alpine as builder
 
-# Set working directory
+# Build stage
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the rest of the application code
 COPY . .
-
-# Build the application
 RUN npm run build:backend
 
 # Production stage
 FROM node:18.18-alpine
-
-# Set working directory
 WORKDIR /app
-
-# Copy built application from builder stage
 COPY --from=builder /app/dist/api /app
-
-# Copy node_modules from builder stage
 COPY --from=builder /app/node_modules /app/node_modules
-
-# Start command
 CMD ["node", "api/server.js"]

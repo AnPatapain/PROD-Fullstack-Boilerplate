@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  nontion-backend-prod:
-    container_name: nontion-backend-prod
+  app-backend-prod:
+    container_name: app-backend-prod
     build:
       context: "${ROOT_PROJECT}"
       dockerfile: "${ROOT_PROJECT}/scripts/Dockerfile.server.prod"
@@ -16,12 +16,12 @@ services:
     image: nginx:alpine
     volumes:
       - "${ROOT_PROJECT}/dist/frontend:/var/www/html"
-      - "${ROOT_PROJECT}/nginx/nginx-prod.conf:/etc/nginx/conf.d/nginx-prod.conf:Z"
+      - "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf:/etc/nginx/conf.d/nginx-prod.conf:Z"
       - "${ROOT_PROJECT}/scripts/tls-dev:/etc/nginx/certs"
     ports:
      - "443:443"
      - "80:80"
     depends_on:
-      - nontion-backend-prod
+      - app-backend-prod
 
     

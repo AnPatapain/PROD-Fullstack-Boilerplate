@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  nontion-app-dev:
-    container_name: nontion-app-dev
+  app-dev:
+    container_name: app-dev
     image: node:18.18-alpine
     volumes:
       - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
@@ -18,10 +18,10 @@ services:
     container_name: nginx-reverse-proxy-dev
     image: nginx:alpine
     volumes:
-      - "${ROOT_PROJECT}/nginx/nginx-dev.conf:/etc/nginx/conf.d/nginx-dev.conf:Z"
+      - "${ROOT_PROJECT}/scripts/nginx/nginx-dev.conf:/etc/nginx/conf.d/nginx-dev.conf:Z"
       - "${ROOT_PROJECT}/scripts/tls-dev:/etc/nginx/certs"
     ports:
      - "443:443"
      - "80:80"
     depends_on:
-      - nontion-app-dev
+      - app-dev

@@ -1,12 +1,16 @@
 #!/bin/bash
 
-TLS_DIR="./tls-dev"
+SCRIPT_DIR="$(dirname $0)"
+cd "${SCRIPT_DIR}/.."
+ROOT_PROJECT="$(pwd)"
+
+TLS_DIR="${ROOT_PROJECT}/scripts/tls-dev"
 CERT_FILE="certificate.crt"
 KEY_FILE="private.key"
 
 print_help() {
   echo "Usage: $0 [--create | --reset | --help]"
-  echo "Create and reset private key and certification for tls protocol"
+  echo "Create or reset private key and certification for tls protocol"
   echo ""
   echo "--create: Creates tls private key and certification in 'tls-dev' folder"
   echo "--reset: Recreate tls private key and certification in 'tls-dev' folder"
@@ -24,6 +28,7 @@ create_key_and_cert() {
 
 if [[ "$1" == "--help" ]]; then
   print_help
+  exit 0
 
 elif [[ "$1" == "--create" ]]; then
   if [[ -f "$TLS_DIR/$CERT_FILE" && -f "$TLS_DIR/$KEY_FILE" ]]; then
