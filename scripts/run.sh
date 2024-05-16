@@ -3,12 +3,13 @@
 if [[ "$1" =~ "help" ]]; then
     echo "App script"
     echo ""
-    echo "Available commands: ./run.sh [help] [reset] [test]"
+    echo "Available commands: ./run.sh [help] [reset] [test] [run_as_prod]"
     echo ""
     echo "Examples"
-    echo "./run.sh          run app in dev local"
-    echo "./run.sh reset    remove node_modules"
-    echo "./run.sh test     run test"
+    echo "./run.sh                  run app in dev local"
+    echo "./run.sh reset            remove node_modules"
+    echo "./run.sh test             run test"
+    echo "./run.sh run_as_prod      run as production"
 fi
 
 
@@ -26,9 +27,17 @@ cd "${ROOT_PROJECT}"
 
 if [[ "$1" =~ "reset" ]]; then
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" down -t 1
-    sudo rm -rf node_modules
+    sudo rm -rf node_modules dist
     echo "Node_modules have been reset"
     exit 0
+
+elif [[ "$1" =~ "run_as_prod" ]]; then
+    export RUN_BACKEND_PROD="node server.js"
+    npm run build # build the frontend and mount to docker that runs nginx so that nginx can serve static fe file. 
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" up --remove-orphans -d
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" logs -f nontion-backend-prod -f nginx-reverse-proxy-prod
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" down -t 1
+
 else
     if [[ "$1" =~ "test" ]]; then
         export DOCKER_APP_CMD="npm install && npm run dev"

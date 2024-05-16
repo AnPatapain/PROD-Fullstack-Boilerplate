@@ -4,10 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "-------- Dev scripts --------": "",
     "dev": "concurrently --kill-others \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:frontend": "vite",
-    "dev:backend": "nodemon --watch 'src/api/**/*' --ext ts --exec 'ts-node --project tsconfig.server.json src/api/server.ts'",
-    "build": "tsc && vite build",
+    "dev:backend": "nodemon --watch 'src/api/**/*' --ext ts --exec 'ts-node --project tsconfig.server.dev.json src/api/server.ts'",
+    
+    "-------- Build scripts --------": "",
+    "build:clean": "rm -rf dist",
+    "build": "npm run build:clean && npm install && npm run build:frontend && npm run build:backend",
+    "build:frontend": "tsc --project tsconfig.json && vite build",
+    "build:backend": "tsc --project tsconfig.server.prod.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

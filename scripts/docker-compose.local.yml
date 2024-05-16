@@ -10,6 +10,7 @@ services:
     command: sh -c "cd ${ROOT_PROJECT} && ${DOCKER_APP_CMD}"
     ports:
       - "3000:3000"
+      - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_UID}"
     privileged: true
 
@@ -17,8 +18,8 @@ services:
     container_name: nginx-reverse-proxy-dev
     image: nginx:alpine
     volumes:
-      - ../nginx:/etc/nginx/conf.d
-      - ./tls-dev:/etc/nginx/certs
+      - "${ROOT_PROJECT}/nginx/nginx-dev.conf:/etc/nginx/conf.d/nginx-dev.conf:Z"
+      - "${ROOT_PROJECT}/scripts/tls-dev:/etc/nginx/certs"
     ports:
      - "443:443"
      - "80:80"
