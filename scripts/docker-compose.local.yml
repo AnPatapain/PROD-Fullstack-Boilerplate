@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app-dev:
-    container_name: app-dev
+    container_name: ${APP_DEV_CONTAINER}
     image: node:18.18-alpine
     volumes:
       - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
@@ -15,7 +15,7 @@ services:
     privileged: true
 
   nginx-reverse-proxy-dev:
-    container_name: nginx-reverse-proxy-dev
+    container_name: ${NGINX_REVERSE_PROXY_DEV_CONTAINER}
     image: nginx:alpine
     volumes:
       - "${ROOT_PROJECT}/scripts/nginx/nginx-dev.conf:/etc/nginx/conf.d/nginx-dev.conf:Z"
