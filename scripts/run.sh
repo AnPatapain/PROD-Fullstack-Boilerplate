@@ -20,7 +20,7 @@ display_help() {
 }
 
 # Function to reset node_modules and dist
-reset_node_modules() {
+reset_app() {
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" down -t 1
     sudo rm -rf node_modules dist
     sudo rm -f "${ROOT_PROJECT}/scripts/nginx/nginx-dev.conf"
@@ -64,7 +64,7 @@ if [[ "$1" = "--help" ]]; then
     exit 0
 
 elif [[ "$1" = "reset" ]]; then
-    reset_node_modules
+    reset_app
     exit 0
 
 elif [[ "$1" = "dev" ]]; then
