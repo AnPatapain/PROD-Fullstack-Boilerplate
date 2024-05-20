@@ -1,4 +1,4 @@
-# MERN-Typescript Stack Project with Docker and Nginx
+# MERN-Typescript with Docker and Nginx
 
 This project is a full-stack MERN-Typescript application boilerplate, using Docker for containerization and Nginx as a reverse proxy with TLS for secure communication. This setup allows for both local development and production deployment. By using this boilerplate, you can focus on your business concerns without worrying about the configuration.
 
