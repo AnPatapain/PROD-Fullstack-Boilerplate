@@ -15,7 +15,7 @@ export const App = () => {
 
     return <div>
         <p>{getToDayISOString()}</p>
-        <p>With youtrack-github workflow</p>
+        <p>Test youtrack-github workflow 1</p>
         {display}
     </div>
 }
