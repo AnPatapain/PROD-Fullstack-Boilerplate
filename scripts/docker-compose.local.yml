@@ -1,18 +1,20 @@
-version: '3.8'
+version: '1.29.2'
 
 services:
   app-dev:
     container_name: ${APP_DEV_CONTAINER}
-    image: node:18.18-alpine
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM  node:18.18-alpine
+        RUN npm install -g pnpm
     volumes:
       - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
-
     command: sh -c "cd ${ROOT_PROJECT} && ${DOCKER_APP_CMD}"
     ports:
       - "3000:3000"
       - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_UID}"
-    privileged: true
 
   nginx-reverse-proxy-dev:
     container_name: ${NGINX_REVERSE_PROXY_DEV_CONTAINER}

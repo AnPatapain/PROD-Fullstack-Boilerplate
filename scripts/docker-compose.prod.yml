@@ -5,11 +5,10 @@ services:
     container_name: ${BACKEND_PROD_CONTAINER}
     build:
       context: "${ROOT_PROJECT}"
-      dockerfile: "${ROOT_PROJECT}/scripts/Dockerfile.server.prod"
+      dockerfile: "${ROOT_PROJECT}/scripts/Dockerfile"
     ports:
       - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_UID}"
-    privileged: true
 
   nginx-reverse-proxy-prod:
     container_name: ${NGINX_REVERSE_PROXY_PROD_CONTAINER}

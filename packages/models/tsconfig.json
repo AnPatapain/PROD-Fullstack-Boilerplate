@@ -7,8 +7,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/api/**/*", "src/shared/**/*"], // Include both src/api and src/shared
-  "exclude": ["node_modules", "**/*.spec.ts", "src/frontend/**/*"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node",
