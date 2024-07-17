@@ -31,7 +31,7 @@ display_help() {
 # Function to reset node_modules and dist
 reset_app() {
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" down -t 1
-    sudo rm -rf node_modules packages/*/node_modules dist
+    sudo rm -rf node_modules packages/*/node_modules packages/*/dist
     sudo rm -f "${ROOT_PROJECT}/scripts/nginx/nginx-dev.conf"
     sudo rm -f "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf"
     echo "node_modules, dist, nginx config files removed successfully !"
@@ -40,7 +40,8 @@ reset_app() {
 # Function to run the application in production mode
 run_prod() {
     envsubst '${BACKEND_PROD_CONTAINER}' < "${ROOT_PROJECT}/scripts/nginx/nginx-prod.template.conf" > "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf"
-    npm run build # build the frontend and mount to docker that runs nginx so that nginx can serve static fe file. 
+    npm run build # build the frontend and mount to docker that runs nginx so that nginx can serve static fe file.
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" build --no-cache
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" up --remove-orphans -d
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" logs -f app-backend-prod -f nginx-reverse-proxy-prod
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" down -t 1
@@ -51,6 +52,7 @@ run_dev() {
     export DOCKER_APP_CMD="pnpm i && pnpm run dev"
     envsubst '${APP_DEV_CONTAINER}' < "${ROOT_PROJECT}/scripts/nginx/nginx-dev.template.conf" > "${ROOT_PROJECT}/scripts/nginx/nginx-dev.conf"
     mkdir -p node_modules
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" build --no-cache
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" up --remove-orphans -d
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" logs -f app-dev -f nginx-reverse-proxy-dev # Service name not container name
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" down -t 1

@@ -14,7 +14,7 @@ services:
     container_name: ${NGINX_REVERSE_PROXY_PROD_CONTAINER}
     image: nginx:alpine
     volumes:
-      - "${ROOT_PROJECT}/dist/frontend:/var/www/html"
+      - "${ROOT_PROJECT}/packages/frontend/dist:/var/www/html"
       - "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf:/etc/nginx/conf.d/nginx-prod.conf:Z"
       - "${ROOT_PROJECT}/scripts/tls-dev:/etc/nginx/certs"
     ports:

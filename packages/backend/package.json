@@ -7,7 +7,9 @@
     "-------- Dev scripts --------": "",
     "dev": "nodemon --watch 'src/**/*' --ext ts --exec 'ts-node --project tsconfig.json src/server.ts'",
     "-------- Build scripts --------": "",
-    "build": "tsc --project tsconfig.json"
+    "build": "tsc --project tsconfig.build.json",
+    "-------- Prod scripts --------": "",
+    "prod": "node dist/backend/src/server.js"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
