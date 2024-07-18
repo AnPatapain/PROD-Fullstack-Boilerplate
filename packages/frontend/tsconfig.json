@@ -1,0 +1,43 @@
+/*
+ * tsconfig.json
+ *
+ * Frontend development environment has two environments:
+ * - Browser environment where your actual FE code runs on
+ * - Node.js environment where Vite server runs on, that has
+ *   different API, constraints compared to browser environment
+ * So we need two tailored tsconfig files for each environment:
+ * - tsconfig.json: Main configuration file, which rules all the options for Browser and Node.js
+ * - tsconfig.node.json: Specific configuration for Vite dev server runs on Node.js
+ *
+ * Author: Ke An Nguyen
+ */
+
+{
+  "compilerOptions": {
+    "target": "ES2020",                          // Use modern JavaScript features.
+    "useDefineForClassFields": true,             // Use 'define' for class fields.
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],    // Include ES2020 and DOM APIs.
+    "module": "ESNext",                          // Use ESNext module system.
+    "skipLibCheck": true,                        // Skip type checking of declaration files.
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",               // Use bundler resolution algorithm.
+    "allowImportingTsExtensions": true,          // Allow imports with .ts extensions.
+    "resolveJsonModule": true,                   // Allow importing JSON files.
+    "isolatedModules": true,                     // Treat each file as a module.
+    "noEmit": true,                              // Do not emit output files.
+    "jsx": "react-jsx",                          // Use React JSX transform.
+
+    /* Linting */
+    "strict": true,                              // Enable strict type-checking.
+    "noUnusedLocals": true,                      // Report unused local variables.
+    "noUnusedParameters": true,                  // Report unused parameters.
+    "noFallthroughCasesInSwitch": true           // Report fallthrough in switch cases.
+  },
+  "include": [
+    "./vite.config.ts"                           // Include Vite config file.
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" }           // Reference Node.js config.
+  ]
+}

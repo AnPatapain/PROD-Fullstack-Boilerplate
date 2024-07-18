@@ -21,10 +21,10 @@ Given that this is a monolithic project, with both frontend and backend code loc
 
 ## Overview  
 #### Development  
-![Docker Compose for Development](architecture-dev.png)
+![Docker Compose for Development](static/architecture-dev.png)
 
 #### Production    
-![Docker Compose for Production](architecture-prod.png)
+![Docker Compose for Production](static/architecture-prod.png)
 
 ## Project Structure
 ``` 

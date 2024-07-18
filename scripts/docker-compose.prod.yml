@@ -1,21 +1,29 @@
-version: '3.8'
+# docker-compose-prod.yml
+# This file lists the containers running the services to be run on production:
+# - app-backend-prod: Runs backend process
+# - nginx-reverse-proxy-prod: reverse proxy forwarding the /api prefix request
+#   to backend process or serves the static-built frontend files (frontend served by reverse proxy)
+#   for all other requests.
+# Author: Ke An Nguyen
+version: '1.29.2'
 
 services:
   app-backend-prod:
     container_name: ${BACKEND_PROD_CONTAINER}
     build:
       context: "${ROOT_PROJECT}"
-      dockerfile: "${ROOT_PROJECT}/scripts/Dockerfile.server.prod"
+      dockerfile: "${ROOT_PROJECT}/scripts/Dockerfile"
+    volumes:
+      - "${ROOT_PROJECT}/packages/backend/dist:/app/packages/backend/dist:rw"
     ports:
       - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_UID}"
-    privileged: true
 
   nginx-reverse-proxy-prod:
     container_name: ${NGINX_REVERSE_PROXY_PROD_CONTAINER}
     image: nginx:alpine
     volumes:
-      - "${ROOT_PROJECT}/dist/frontend:/var/www/html"
+      - "${ROOT_PROJECT}/packages/frontend/dist:/var/www/html"
       - "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf:/etc/nginx/conf.d/nginx-prod.conf:Z"
       - "${ROOT_PROJECT}/scripts/tls-dev:/etc/nginx/certs"
     ports:

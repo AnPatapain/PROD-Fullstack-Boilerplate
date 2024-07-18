@@ -1,18 +1,28 @@
-version: '3.8'
+# docker-compose-local.yml
+# This file lists the containers running the services to be run on development:
+# - app-dev: Runs backend process and frontend process (vite server, that serves FE files with hot module reload)
+# - nginx-reverse-proxy-prod: reverse proxy forwarding the /api prefix request
+#   to backend process and all other requests to frontend process (vite server)
+#
+# Note: The command to run BE and FE processes is DOCKER_APP_CMD which is defined in scripts/run.sh
+# Author: Ke An Nguyen
+version: '1.29.2'
 
 services:
   app-dev:
     container_name: ${APP_DEV_CONTAINER}
-    image: node:18.18-alpine
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM  node:18.18-alpine
+        RUN npm install -g pnpm
     volumes:
       - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
-
     command: sh -c "cd ${ROOT_PROJECT} && ${DOCKER_APP_CMD}"
     ports:
       - "3000:3000"
       - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_UID}"
-    privileged: true
 
   nginx-reverse-proxy-dev:
     container_name: ${NGINX_REVERSE_PROXY_DEV_CONTAINER}

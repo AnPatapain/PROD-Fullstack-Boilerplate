@@ -1,0 +1,9 @@
+# pnpm-workspace.yml
+# We use pnpm to configures multi-package workspace project.
+# This file lists all packages in project
+# Author: Ke An Nguyen
+packages:
+  - 'packages/backend'   # Package contains backend code
+  - 'packages/frontend'  # Package contains frontend code
+  - 'packages/models'    # Package contains models code to be used by backend and frontend packages
+  - 'packages/shared'    # Package contains shared code to be used by backend and frontend packages
