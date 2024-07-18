@@ -6,6 +6,8 @@ services:
     build:
       context: "${ROOT_PROJECT}"
       dockerfile: "${ROOT_PROJECT}/scripts/Dockerfile"
+    volumes:
+      - "${ROOT_PROJECT}/packages/backend/dist:/app/packages/backend/dist:rw"
     ports:
       - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_UID}"
