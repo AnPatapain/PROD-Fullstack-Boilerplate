@@ -1,5 +1,10 @@
 #!/bin/bash
-
+################################################################
+# tls-cert-key.sh
+# Script to create or reset key/certification for tls/ssl
+# Run ./tls-cert-key.sh --help to see all options
+# Author: Ke An Nguyen
+################################################################
 SCRIPT_DIR="$(dirname $0)"
 cd "${SCRIPT_DIR}/.."
 ROOT_PROJECT="$(pwd)"

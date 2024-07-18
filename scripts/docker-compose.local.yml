@@ -1,3 +1,11 @@
+# docker-compose-local.yml
+# This file lists the containers running the services to be run on development:
+# - app-dev: Runs backend process and frontend process (vite server, that serves FE files with hot module reload)
+# - nginx-reverse-proxy-prod: reverse proxy forwarding the /api prefix request
+#   to backend process and all other requests to frontend process (vite server)
+#
+# Note: The command to run BE and FE processes is DOCKER_APP_CMD which is defined in scripts/run.sh
+# Author: Ke An Nguyen
 version: '1.29.2'
 
 services:

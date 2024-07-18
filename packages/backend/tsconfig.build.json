@@ -1,7 +1,13 @@
+/*
+ * tsconfig.build.json
+ * This TypeScript configuration file extends the base tsconfig.json
+ * and adds specific configurations for building the project.
+ * Author: Ke An Nguyen
+ */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "outDir": "./dist"
+    "module": "ESNext", // Use ESNext as target modules for the compiled javascript code
+    "outDir": "./dist" // Put the compiled javascript file in dist folder in the same location of this file
   },
 }

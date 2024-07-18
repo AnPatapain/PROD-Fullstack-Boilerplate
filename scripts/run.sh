@@ -1,4 +1,14 @@
 #!/bin/bash
+############################################################################
+# run.sh
+# Entry point for running development, production, test environment
+# Workflows:
+# - ./scripts/run.sh dev: Running app in development
+# - ./scripts/run.sh prod: Go to your VPS server, run this command to run as prod environment
+# - ./scripts/run.sh reset: Remove the node_modules and the built files (for prod).
+#
+# Author: Ke An Nguyen
+##############################################
 
 # Define the container name for dev local
 export APP_DEV_CONTAINER="app-dev"

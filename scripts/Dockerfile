@@ -1,4 +1,6 @@
-# This Dockerfile for building backend running on production
+# Dockerfile
+# This Dockerfile for building backend running on production.
+# To be used in scripts/docker-compose.prod.yml
 # Author: Ke An Nguyen
 
 FROM node:18.18-alpine as builder

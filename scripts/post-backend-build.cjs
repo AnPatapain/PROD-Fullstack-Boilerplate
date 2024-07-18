@@ -1,5 +1,12 @@
 /**
- * Post build script to add extension .js to compiled javascript file
+ * post-backend-build.cjs
+ * For building backend, we specify the target module is ESNext in
+ * packages/backend/tsconfig.build.json. Using ESNext, the compiled
+ * codes in javascript use import keyword without extension '.js'
+ * for local import, which causes the module resolution errors.
+ *
+ * This file make a post build script to add extension .js to compiled javascript file
+ *
  * Author: Ke An Nguyen
  */
 

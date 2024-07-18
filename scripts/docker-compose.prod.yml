@@ -1,4 +1,11 @@
-version: '3.8'
+# docker-compose-prod.yml
+# This file lists the containers running the services to be run on production:
+# - app-backend-prod: Runs backend process
+# - nginx-reverse-proxy-prod: reverse proxy forwarding the /api prefix request
+#   to backend process or serves the static-built frontend files (frontend served by reverse proxy)
+#   for all other requests.
+# Author: Ke An Nguyen
+version: '1.29.2'
 
 services:
   app-backend-prod:
