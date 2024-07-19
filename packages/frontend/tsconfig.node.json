@@ -1,28 +1,14 @@
-/*
- * tsconfig.node.json
- *
- * Frontend development environment has two environments:
- * - Browser environment where your actual FE code runs on
- * - Node.js environment where Vite server runs on, that has
- *   different API, constraints compared to browser environment
- * So we need two tailored tsconfig files for each environment:
- * - tsconfig.json: Main configuration file, which rules all the options for Browser and Node.js
- * - tsconfig.node.json: Specific configuration for Vite dev server runs on Node.js
- *
- * Author: Ke An Nguyen
- */
-
 {
   "compilerOptions": {
-    "composite": true,                        // Incremental compilation.
-    "skipLibCheck": true,                     // Skip type checking for .d.ts files.
-    "module": "ESNext",                       // Use ESNext module system.
-    "moduleResolution": "bundler",            // Bundler module resolution.
-    "allowSyntheticDefaultImports": true,     // Allow default imports from modules without default export.
-    "strict": true                            // Enable strict type-checking.
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "strict": true
   },
   "include": [
-    "./vite.config.ts"                        // Include Vite config file.
+    "./vite.config.ts"
   ]
 }
 
