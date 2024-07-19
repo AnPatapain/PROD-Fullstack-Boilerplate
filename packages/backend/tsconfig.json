@@ -1,21 +1,15 @@
-/*
- * tsconfig.json
- * This is the main TypeScript configuration file.
- * It specifies various compiler options and settings for the TypeScript project.
- * Author: Ke An Nguyen
- */
 {
   "compilerOptions": {
-    "target": "ESNext",                        // Target version as ESNext provides the latest ECMAScript features.
-    "module": "ESNext",                        // Latest module system (ESNext) for modern ESMAScript module support.
-    "strict": true,                            // Strictly type check.
-    "esModuleInterop": true,                   // Allow import the CommonJS module using 'import' keyword
-    "skipLibCheck": true,                      // Skip type checking of declaration files (*.d.ts). For compilation speed
-    "forceConsistentCasingInFileNames": true   // Avoid case-sensitive file systems issue.
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "ts-node": {
-    "esm": true,                               // Enable ECMAScript modules in ts-node.
-    "experimentalSpecifierResolution": "node", // Use Node's experimental specifier resolution algorithm.
-    "transpileOnly": true                      // Transpile the code without type checking. Improves performance but skips type checks.
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true
   }
 }
