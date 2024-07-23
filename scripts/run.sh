@@ -28,14 +28,13 @@ export DOCKER_UID="$UID"
 cd "${ROOT_PROJECT}"
 
 display_help() {
-    echo "App script"
-    echo ""
+    echo "Entry point command to run: development, production, test and reset your environment."
+    echo "Reset means removing node_modules, build files"
     echo "Available commands: ./run.sh [help] [reset] [test] [prod]"
-    echo ""
     echo "Examples"
-    echo "./run.sh dev              run app in dev local"
-    echo "./run.sh prod             run as production"
-    echo "./run.sh reset            remove node_modules, dist"
+    echo "./run.sh dev       run app in development local environment"
+    echo "./run.sh prod      run app as production, frontend will be built into static file and served by Nginx"
+    echo "./run.sh reset     remove node_modules, build files (dist), nginx config files. These stuffs will be reinstalled if you run dev or prod"
 }
 
 # Function to reset node_modules and dist
