@@ -1,25 +1,38 @@
-# MERN-Typescript with Docker and Nginx
+# Fullstack boilerplate - Production ready
+![](./static/Heros-Vasnetsov.jpg)
+## Who & Why
+For who ?  
+Got a brilliant project idea and can't wait to build the MVP ?  
+Tired of spending weeks on the basic and boring stuffs kind of project setup, configuration, 
+user authentication, API docs, etc. ?    
+This repo is your production-ready start point. It handles the mundane
+so that you can focus on what really matters: your project's unique feature and
+the business logic. So in short: **Want to turn out the idea into product quickly ? This repo is for you**.
 
-This project is a full-stack MERN-Typescript application boilerplate, using Docker for containerization and Nginx as a reverse proxy with TLS for secure communication. This setup allows for both local development and production deployment. By using this boilerplate, you can focus on your business concerns without worrying about the configuration.
+Why to use ?  
+This boilerplate all-in-one solution, single code base for both frontend 
+and backend. No need to juggle multiple repos or deal with complex setups 
+(Two codebases organize teams, not code). In short: **You dev, the boilerplate handle the rest**.
 
-Stacks: Typescript, Node, React, BashScript, Docker, Nginx
-  
-We use Docker to avoid the problem "But it works on my computer".  
-  
-Given that this is a monolithic project, with both frontend and backend code located in the same src folder, we have two processes running in development: one for the backend and one for the frontend. Nginx is used as a reverse proxy to handle these requests efficiently. In production, Nginx serves the frontend static files and forwards backend requests, providing a seamless integration of services.
+## What
+This boilerplate leverages a workspace multi-package architecture. Using Docker 
+for everything, we ensure **it works on my machine and yours**. Nginx serves 
+as a robust reverse proxy, managing frontend and backend requests 
+seamlessly. In short:  
+**All-in-one codebase. Streamlined setup. Focused development.**
 ## Table of Contents
-- [Overview](#overview)
+- [Tech stack](#tech-stack)
+- [Architecture](#architecture)
 - [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
 - [Usage](#usage)
-    - [Reset](#reset)
-    - [Development](#development)
-    - [Production](#production)
-- [Configuration](#configuration)
-- [TLS Setup](#tls-setup)  
+    - [Installation](#installation)
+    - [Run](#run)
+- [Test](#test)
+- [Vision](#vision)
 
-## Overview  
+## Tech Stack
+
+## Architecture  
 #### Development  
 ![Docker Compose for Development](static/architecture-dev.png)
 
