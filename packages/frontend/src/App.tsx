@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "./api-client";
-import { getToDayISOString } from "../../shared/src/utils";
+import { getToDayISOString } from "@shared/utils.ts";
 
 export const App = () => {
     const [display, setDisplay] = useState<string>('');

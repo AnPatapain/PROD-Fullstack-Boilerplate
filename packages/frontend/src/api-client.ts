@@ -1,4 +1,5 @@
-import type {SampleModel} from '../../models/src/SampleModel.ts';
+import {SampleModel} from "@models/SampleModel.ts";
+
 export const apiClient = {
     sample: {
         getOne: (): Promise<SampleModel> => sendRequest('GET', '/api/sample'),
