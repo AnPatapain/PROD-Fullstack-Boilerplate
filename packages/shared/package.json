@@ -1,5 +1,5 @@
 {
-  "name": "shared",
+  "name": "@app/shared",
   "private": true,
   "version": "0.0.0",
   "type": "module",

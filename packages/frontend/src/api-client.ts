@@ -1,4 +1,4 @@
-import {SampleModel} from "@models/SampleModel.ts";
+import {SampleModel} from "@app/models/SampleModel.ts";
 
 export const apiClient = {
     sample: {
