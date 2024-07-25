@@ -32,12 +32,15 @@ seamlessly. In short:
 - [TODO](#todo)
 
 ## Project structure & Tech stack
+![Packages](static/packages.png)
 This boilerplate use **pnpm**, a package manager to set up a workspace 
 multi-package which contains these packages:
 - **Backend (packages/backend)**: Powered by Node.js and Express, written in TypeScript.
 - **Frontend (packages/frontend)**: Built with React, Vite, and TypeScript.
 - **Shared (packages/shared)**: Common utilities and types shared between frontend and backend.
 - **Models (packages/models)**: Data models shared between Backend and Frontend.
+
+In addition
 - **Scripts (scripts/run.sh)**: Controls the execution of the application, 
 managing development and production workflows.
 
@@ -56,25 +59,30 @@ cd production-fullstack-boilerplate
 
 ## How to run
 From root project, `./scripts/run.sh` is the entry point 
-command to run everything: development, production, test, 
+command to run different environments: development, production, test, 
 reset environment, etc.
 #### Manual
 To see all options of the command `./scripts/run.sh` run:
 ``` bash
 ./scripts/run.sh --help
 ```
-Output:
+#### Check prerequisite installed
+To check whether your environment has the prerequisite to run the boilerplate. Run
 ``` bash
-Entry point command to run: development, production, test and reset your environment.
-Reset means removing node_modules, build files
-Available commands: ./run.sh [help] [reset] [test] [prod]
-Examples
-./run.sh dev       run app in development local environment
-./run.sh prod      run app as production, frontend will be built into static file and served by Nginx
-./run.sh reset     remove node_modules, build files (dist), nginx config files. These stuffs will be reinstalled if you run dev or prod
-```
+./scripts/run.sh prerequisite
+```  
+This will:
+- Check whether Docker installed, if so, check whether Docker can be run as non-root user
+- Check whether pnpm installed.
 #### Development
-To run application in development mode
+In development mode: 
+- Frontend is served by Vite server with hot module reload
+- Typescript files will not be pre-transpiled to javascript but be transpiled
+in run-time by ts-node
+- [Not yet implemented] Mock data seed for development
+- [Not yet implemented] Fake email smtp server
+
+To run development mode
 ``` bash
 ./scripts/run.sh dev
 ```  
@@ -82,6 +90,11 @@ This will:
 - Build and start Docker container for backend, frontend (both in one container)
 - Build and start Docker container for Nginx as Reverse Proxy to handle backend and frontend request.
 #### Production
+In production mode:
+- Frontend is built to single javascript file and served by Nginx
+- Backend is transpiled from Typescript to Javascript to be run
+- The mock data will not be seed
+
 To run application in production mode
 ``` bash
 ./scripts/run.sh prod
@@ -97,6 +110,26 @@ To reset application environment.
 ./scripts/run.sh reset
 ```  
 Best practice: Always run ```./scripts/run.sh reset``` before running ```./scripts/run.sh dev``` and ```./scripts/run.sh prod``` to avoid weird errors.
+
+#### Install package
+Best practice: Run `./scripts/run.sh reset` before running any commands
+bellow
+
+
+To install every dependencies listed in packages/*/package.json
+``` bash
+pnpm install
+```  
+To install dev-dependency for specific package
+``` bash
+pnpm --filter <backend | frontend | shared | models> add --save-dev <package>
+```  
+
+To install dependency for specific package
+``` bash
+pnpm --filter <backend | frontend | shared | models> add <package>
+```  
+
 ## Configuration
 To change the name of docker containers, go to scripts/run.sh and changes the values of these variables:
 ``` bash
