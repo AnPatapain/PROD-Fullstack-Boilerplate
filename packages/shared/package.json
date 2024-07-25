@@ -1,11 +1,13 @@
 {
-  "name": "shared",
+  "name": "@app/shared",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@app/models": "workspace:*"
   },
   "devDependencies": {
   }

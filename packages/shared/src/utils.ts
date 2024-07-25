@@ -1,4 +1,5 @@
-export function getToDayISOString() {
-    const today: Date = new Date();
-    return today.toISOString().split('T')[0];
+import {Message} from "@app/models/src/Message";
+
+export function getPrintableMessage(message: Message) {
+  return `[${new Date(message.timeStamp).toLocaleDateString()}] ${message.content}`;
 }

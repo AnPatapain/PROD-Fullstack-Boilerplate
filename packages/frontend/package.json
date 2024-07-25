@@ -1,15 +1,18 @@
 {
-  "name": "frontend",
+  "name": "@app/frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "-------- Dev scripts --------": "",
     "dev": "vite",
     "-------- Build scripts --------": "",
     "build": "tsc --project tsconfig.json && vite build"
   },
   "dependencies": {
+    "@app/models": "workspace:*",
+    "@app/shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

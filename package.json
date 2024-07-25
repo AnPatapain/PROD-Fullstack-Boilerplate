@@ -1,5 +1,5 @@
 {
-  "name": "mono-mern-starter",
+  "name": "@app/root",
   "private": true,
   "version": "0.0.0",
   "type": "module",

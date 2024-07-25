@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "./api-client";
-import { getToDayISOString } from "../../shared/src/utils";
+import {Message} from "@app/models/src/Message.ts";
+import {getPrintableMessage} from "@app/shared/src/utils.ts";
 
 export const App = () => {
-    const [display, setDisplay] = useState<string>('');
+    const [message, setMessage] = useState<Message | ''>('');
     
     useEffect(() => {
         const fetchData = async () => {
-           const data = await apiClient.sample.getOne();
-           setDisplay(data.message); 
+           const data = await apiClient.message.getOne();
+           setMessage(data);
         };
         fetchData();
     }, [])
 
     return <div>
-        <p>{getToDayISOString()}</p>
-        <p>Test youtrack-github workflow 1</p>
-        {display}
+        <h3>Fullstack mern boilerplate powered by: Typescript, Node, React, Docker, Nginx, BashScript.</h3>
+        <p>You dev, boilerplate handles the rest</p>
+        {message ? getPrintableMessage(message) : 'Loading message from backend...'}
     </div>
 }
 

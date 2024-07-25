@@ -1,10 +1,12 @@
 import { Request, Response} from "express";
-import type { SampleModel } from "../../../models/src/SampleModel";
-import { getToDayISOString } from "../../../shared/src/utils"
+import {Message} from "@app/models/src/Message";
+import {getPrintableMessage} from "@app/shared/src/utils";
 
-export function getSample(req: Request, res: Response) {
-    const sampleData: SampleModel = {
-        message: `Hello 👋, Monolithic fullstack app. Today is ${getToDayISOString()}`
+export function getOneMessage(req: Request, res: Response) {
+    const message: Message = {
+        timeStamp: new Date(),
+        content: 'Hello from backend 👋'
     };
-    res.json(sampleData);    
+    console.log(getPrintableMessage(message));
+    res.json(message);
 }

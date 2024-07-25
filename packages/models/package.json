@@ -1,9 +1,10 @@
 {
-  "name": "models",
+  "name": "@app/models",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
   },
