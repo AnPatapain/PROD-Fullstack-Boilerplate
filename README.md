@@ -4,7 +4,7 @@ Bonjour 👋, to save time for you, stop reading here if you don't use Linux.
 This repo is for Linux only because we use Docker, Bash script, which can not run natively on Windows.
 ## Who & Why
 For who ?  
-Got a brilliant project idea and can't wait to build the MVP ? Tired of spending weeks on the basic and boring stuffs kind of project setup, configuration, 
+Got a brilliant project idea and can't wait to build the MVP ? Tired of spending weeks on the boring stuffs kind of project setup, configuration, 
 user authentication, API docs, etc. ?  
 This repo is your production-ready start point. It handles the mundane
 so that you can focus on what really matters: your project's unique feature and
@@ -125,6 +125,7 @@ Place your TLS certificates and private key to folder scripts/tls-dev or run ```
 ![Docker Compose for Production](static/architecture-prod.png)
 
 ## TODO
+- [ ] Section explaining diff from Dev, Prod, Test environment. How they are set up.
 - [ ] Restrict import from some package  
 - [ ] Script to check the prerequisite or install them maybe ?
 - [ ] Synchronize router, controller, API docs

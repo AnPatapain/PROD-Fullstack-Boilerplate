@@ -1,4 +1,4 @@
-import {Message} from "@app/models/src/SampleModel.ts";
+import {Message} from "@app/models/src/Message.ts";
 
 export const apiClient = {
     message: {
