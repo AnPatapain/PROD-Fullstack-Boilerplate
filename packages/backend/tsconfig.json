@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["node_modules/@app/*"]
+    },
     "target": "ESNext",
     "module": "ESNext",
     "strict": true,

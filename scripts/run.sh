@@ -30,11 +30,23 @@ cd "${ROOT_PROJECT}"
 display_help() {
     echo "Entry point command to run: development, production, test and reset your environment."
     echo "Reset means removing node_modules, build files"
-    echo "Available commands: ./run.sh [help] [reset] [test] [prod]"
-    echo "Examples"
-    echo "./run.sh dev       run app in development local environment"
-    echo "./run.sh prod      run app as production, frontend will be built into static file and served by Nginx"
-    echo "./run.sh reset     remove node_modules, build files (dist), nginx config files. These stuffs will be reinstalled if you run dev or prod"
+    echo "Available commands: ./run.sh [help] [prerequisite] [reset] [test] [prod]"
+    echo "./run.sh prerequisite   check prerequisite"
+    echo "./run.sh dev            run app in development local environment"
+    echo "./run.sh prod           run app as production, frontend will be built into static file and served by Nginx"
+    echo "./run.sh reset          remove node_modules, build files (dist), nginx config files. These stuffs will be reinstalled if you run dev or prod"
+}
+
+# Function that checks the must-have prerequisite for running boilerplate
+check_prerequisite() {
+  command -v docker >/dev/null 2>&1 || { echo >&2 "Docker is required. Please install"; exit 1; }
+  command -v pnpm >/dev/null 2>&1  || { echo >&2 "pnpm is required. Please install"; exit 1; }
+  if ! groups "$USER" | grep &>/dev/null '\bdocker\b'; then
+    echo "User $USER is not in the docker group. Docker must be able to run as a non-root user."
+    echo "Please run 'sudo usermod -aG docker $USER' and then log out and back in."
+    exit 1
+  fi
+  echo "Everything installed, let's goo!"
 }
 
 # Function to reset node_modules and dist
@@ -69,6 +81,10 @@ run_dev() {
 
 if [[ "$1" = "--help" ]]; then
     display_help
+    exit 0
+
+elif [[ "$1" = "prerequisite" ]]; then
+    check_prerequisite
     exit 0
 
 elif [[ "$1" = "reset" ]]; then
