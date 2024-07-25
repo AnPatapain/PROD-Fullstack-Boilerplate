@@ -1,3 +1,4 @@
-export interface SampleModel {
-    message: string;
+export interface Message {
+    timeStamp: Date;
+    content: string;
 }

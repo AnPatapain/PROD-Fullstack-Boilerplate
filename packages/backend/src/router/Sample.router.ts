@@ -1,7 +1,7 @@
 import express from 'express';
-import { getSample } from '../controllers/Sample.controllers';
+import { getOneMessage } from '../controllers/Sample.controllers';
 
 const router = express.Router();
-router.get('/sample', getSample);
+router.get('/message', getOneMessage);
 
 export default router;

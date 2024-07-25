@@ -1,8 +1,8 @@
-import {SampleModel} from "@app/models/SampleModel.ts";
+import {Message} from "@app/models/src/SampleModel.ts";
 
 export const apiClient = {
-    sample: {
-        getOne: (): Promise<SampleModel> => sendRequest('GET', '/api/sample'),
+    message: {
+        getOne: (): Promise<Message> => sendRequest('GET', '/api/message'),
     }
 }
 

@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "-------- Dev scripts --------": "",
     "dev": "vite",
     "-------- Build scripts --------": "",
     "build": "tsc --project tsconfig.json && vite build"
   },
   "dependencies": {
-    "@app/models": "workspace:0.0.0",
-    "@app/shared": "workspace:0.0.0",
+    "@app/models": "workspace:*",
+    "@app/shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -21,7 +22,6 @@
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite": "^5.2.0"
   }
 }

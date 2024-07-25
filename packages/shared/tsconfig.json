@@ -12,5 +12,5 @@
     "experimentalSpecifierResolution": "node",
     "transpileOnly": true
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts"],
 }

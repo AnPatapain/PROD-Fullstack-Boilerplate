@@ -1,9 +1,10 @@
 import { Request, Response} from "express";
-import type { SampleModel } from "@app/models/SampleModel";
+import {Message} from "@app/models/src/SampleModel";
 
-export function getSample(req: Request, res: Response) {
-    const sampleData: SampleModel = {
-        message: 'Hello 👋, Monolithic fullstack app. Today is:'
+export function getOneMessage(req: Request, res: Response) {
+    const sampleData: Message = {
+        timeStamp: new Date(),
+        content: 'Hello from backend 👋'
     };
     res.json(sampleData);
 }

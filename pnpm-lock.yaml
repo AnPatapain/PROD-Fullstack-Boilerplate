@@ -21,10 +21,10 @@ importers:
   packages/backend:
     dependencies:
       '@app/models':
-        specifier: workspace:0.0.0
+        specifier: workspace:*
         version: link:../models
       '@app/shared':
-        specifier: workspace:0.0.0
+        specifier: workspace:*
         version: link:../shared
       '@types/express':
         specifier: ^4.17.21
@@ -46,10 +46,10 @@ importers:
   packages/frontend:
     dependencies:
       '@app/models':
-        specifier: workspace:0.0.0
+        specifier: workspace:*
         version: link:../models
       '@app/shared':
-        specifier: workspace:0.0.0
+        specifier: workspace:*
         version: link:../shared
       react:
         specifier: ^18.2.0
@@ -76,13 +76,14 @@ importers:
       vite:
         specifier: ^5.2.0
         version: 5.2.10(@types/node@20.12.7)
-      vite-tsconfig-paths:
-        specifier: ^4.3.2
-        version: 4.3.2(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7))
 
   packages/models: {}
 
-  packages/shared: {}
+  packages/shared:
+    dependencies:
+      '@app/models':
+        specifier: workspace:*
+        version: link:../models
 
 packages:
 
@@ -1014,9 +1015,6 @@ packages:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
 
-  globrex@0.1.2:
-    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-
   gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
 
@@ -1512,16 +1510,6 @@ packages:
       '@swc/wasm':
         optional: true
 
-  tsconfck@3.1.1:
-    resolution: {integrity: sha512-00eoI6WY57SvZEVjm13stEVE90VkEdJAFGgpFLTsZbJyW/LwFQ7uQxJHWpZ2hzSWgCPKc9AnBnNP+0X7o3hAmQ==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
@@ -1571,14 +1559,6 @@ packages:
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
-
-  vite-tsconfig-paths@4.3.2:
-    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
-    peerDependencies:
-      vite: '*'
-    peerDependenciesMeta:
-      vite:
-        optional: true
 
   vite@5.2.10:
     resolution: {integrity: sha512-PAzgUZbP7msvQvqdSD+ErD5qGnSFiGOoWmV5yAKUEI0kdhjbH6nMWVyZQC/hSc4aXwc0oJ9aEdIiF9Oje0JFCw==}
@@ -2657,8 +2637,6 @@ snapshots:
       merge2: 1.4.1
       slash: 3.0.0
 
-  globrex@0.1.2: {}
-
   gopd@1.0.1:
     dependencies:
       get-intrinsic: 1.2.4
@@ -3118,10 +3096,6 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  tsconfck@3.1.1(typescript@5.4.5):
-    optionalDependencies:
-      typescript: 5.4.5
-
   tslib@2.6.2: {}
 
   type-check@0.4.0:
@@ -3158,17 +3132,6 @@ snapshots:
   v8-compile-cache-lib@3.0.1: {}
 
   vary@1.1.2: {}
-
-  vite-tsconfig-paths@4.3.2(typescript@5.4.5)(vite@5.2.10(@types/node@20.12.7)):
-    dependencies:
-      debug: 4.3.4(supports-color@5.5.0)
-      globrex: 0.1.2
-      tsconfck: 3.1.1(typescript@5.4.5)
-    optionalDependencies:
-      vite: 5.2.10(@types/node@20.12.7)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   vite@5.2.10(@types/node@20.12.7):
     dependencies:
