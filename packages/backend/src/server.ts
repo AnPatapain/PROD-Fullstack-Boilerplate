@@ -1,8 +1,24 @@
-import express from "express";
-import sampleRouter from './router/Sample.router';
+import express, {json, Request, Response, urlencoded} from "express";
+import {RegisterRoutes} from "../dist/tsoa/routes";
+import swaggerDocument from "../dist/tsoa/swagger.json" assert {type: "json"};
+import swaggerUi from "swagger-ui-express";
+
 const app = express();
 
-app.use('/api', sampleRouter);
+// Use body parser to read sent json payloads
+app.use(
+    urlencoded({
+        extended: true,
+    })
+);
+app.use(json());
+app.use("/api/docs", swaggerUi.serve, async (_req: Request, res: Response) => {
+    return res.send(
+        swaggerUi.generateHTML(swaggerDocument)
+    );
+});
+
+RegisterRoutes(app);
 
 app.listen(8080, () => {
     console.log('Listening on port 8080');

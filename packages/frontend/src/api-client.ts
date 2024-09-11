@@ -2,7 +2,7 @@ import {Message} from "@app/models/src/Message.ts";
 
 export const apiClient = {
     message: {
-        getOne: (): Promise<Message> => sendRequest('GET', '/api/message'),
+        getSampleMessage: (): Promise<Message> => sendRequest('GET', '/api/messages/sample'),
     }
 }
 
