@@ -8,7 +8,7 @@ export const App = () => {
     
     useEffect(() => {
         const fetchData = async () => {
-           const data = await apiClient.message.getOne();
+           const data = await apiClient.message.getSampleMessage();
            setMessage(data);
         };
         fetchData();
