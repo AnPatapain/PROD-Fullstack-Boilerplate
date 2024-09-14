@@ -1,6 +1,6 @@
 import express, {json, Request, Response, urlencoded} from "express";
-import {RegisterRoutes} from "../dist/tsoa/routes";
-import swaggerDocument from "../dist/tsoa/swagger.json" assert {type: "json"};
+import {RegisterRoutes} from "../tsoa/routes";
+import swaggerDocument from "../tsoa/swagger.json" assert {type: "json"};
 import swaggerUi from "swagger-ui-express";
 
 const app = express();
