@@ -61,7 +61,7 @@ reset_app() {
 # Function to run the application in production mode
 run_prod() {
     envsubst '${BACKEND_PROD_CONTAINER}' < "${ROOT_PROJECT}/scripts/nginx/nginx-prod.template.conf" > "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf"
-    npm run build # build the frontend and mount to docker that runs nginx so that nginx can serve static fe file.
+    pnpm run build # build the frontend and mount to docker that runs nginx so that nginx can serve static fe file.
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" build --no-cache
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" up --remove-orphans -d
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" logs -f app-backend-prod -f nginx-reverse-proxy-prod

@@ -3,10 +3,10 @@
   "noImplicitAdditionalProperties": "silently-remove-extras",
   "controllerPathGlobs": ["src/**/*.controller.ts"],
   "spec": {
-    "outputDirectory": "dist/tsoa",
+    "outputDirectory": "tsoa",
     "specVersion": 3
   },
   "routes": {
-    "routesDir": "dist/tsoa"
+    "routesDir": "tsoa"
   }
 }

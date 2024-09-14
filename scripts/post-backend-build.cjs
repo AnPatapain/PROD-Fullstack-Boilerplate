@@ -13,6 +13,10 @@
 const fs = require('fs');
 const path = require('path');
 
+const ALLOWED_EXTENSION = [
+    '.json',
+]
+
 function addJsExtensions(dir) {
     fs.readdirSync(dir).forEach(file => {
         const fullPath = path.join(dir, file);
@@ -20,9 +24,12 @@ function addJsExtensions(dir) {
             addJsExtensions(fullPath);
         } else if (path.extname(file) === '.js') {
             const data = fs.readFileSync(fullPath, 'utf8');
-            const result = data.replace(/(from\s+['"])(\.\/|..\/)(.*?)(['"])/g, (match, p1, p2, p3, p4) => {
+            const result = data.replace(/(from\s+['"])((?:\.\.?\/)+)(.*?)(['"])/g, (match, p1, p2, p3, p4) => {
+                // Get the extension
+                const extension = path.extname(p3);
+                console.log(`extension: ${extension}`);
                 // Only add .js extension if it doesn't already end with .js
-                if (!p3.endsWith('.js')) {
+                if (!ALLOWED_EXTENSION.includes(extension)) {
                     return `${p1}${p2}${p3}.js${p4}`;
                 }
                 return match;
