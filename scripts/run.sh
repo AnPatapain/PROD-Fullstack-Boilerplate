@@ -13,6 +13,7 @@
 # Define the container name for dev local
 export APP_DEV_CONTAINER="app-dev"
 export NGINX_REVERSE_PROXY_DEV_CONTAINER="nginx-reverse-proxy-dev"
+export DATABASE_CONTAINER="postgres-db"
 
 # Define the container name for production
 export BACKEND_PROD_CONTAINER="backend-prod" 
@@ -25,6 +26,7 @@ cd "${SCRIPT_DIR}/.."
 export ROOT_PROJECT="$(pwd)"
 # To ensure the permission inside docker container matches outside. To be used in docker-compose.local.yml
 export DOCKER_UID="$UID"
+export DOCKER_GID="$GID"
 cd "${ROOT_PROJECT}"
 
 display_help() {
@@ -75,7 +77,7 @@ run_dev() {
     mkdir -p node_modules
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" build --no-cache
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" up --remove-orphans -d
-    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" logs -f app-dev -f nginx-reverse-proxy-dev # Service name not container name
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" logs -f app-dev -f postgres-db -f nginx-reverse-proxy-dev # Service name not container name
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" down -t 1
 }
 

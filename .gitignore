@@ -15,6 +15,7 @@ dist-ssr
 *.local
 scripts/nginx/nginx-dev.conf
 scripts/nginx/nginx-prod.conf
+data
 
 # Editor directories and files
 .vscode/*
