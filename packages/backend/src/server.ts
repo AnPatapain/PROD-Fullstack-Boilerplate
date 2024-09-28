@@ -2,6 +2,7 @@ import express, {json, Request, Response, urlencoded} from "express";
 import {RegisterRoutes} from "../tsoa/routes";
 import swaggerDocument from "../tsoa/swagger.json" assert {type: "json"};
 import swaggerUi from "swagger-ui-express";
+import {prisma, seed} from "../prisma/seed";
 
 const app = express();
 
@@ -19,6 +20,16 @@ app.use("/api/docs", swaggerUi.serve, async (_req: Request, res: Response) => {
 });
 
 RegisterRoutes(app);
+
+seed(prisma)
+    .then(async () => {
+        await prisma.$disconnect()
+    })
+    .catch(async (e) => {
+        console.error(e)
+        await prisma.$disconnect()
+        process.exit(1)
+    });
 
 app.listen(8080, () => {
     console.log('Listening on port 8080');

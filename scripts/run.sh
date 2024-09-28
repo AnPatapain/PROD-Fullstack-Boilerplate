@@ -13,6 +13,7 @@
 # Define the container name for dev local
 export APP_DEV_CONTAINER="app-dev"
 export NGINX_REVERSE_PROXY_DEV_CONTAINER="nginx-reverse-proxy-dev"
+export DATABASE_CONTAINER="postgres-db"
 
 # Define the container name for production
 export BACKEND_PROD_CONTAINER="backend-prod" 
@@ -25,12 +26,13 @@ cd "${SCRIPT_DIR}/.."
 export ROOT_PROJECT="$(pwd)"
 # To ensure the permission inside docker container matches outside. To be used in docker-compose.local.yml
 export DOCKER_UID="$UID"
+export DOCKER_GID="$GID"
 cd "${ROOT_PROJECT}"
 
 display_help() {
     echo "Entry point command to run: development, production, test and reset your environment."
     echo "Reset means removing node_modules, build files"
-    echo "Available commands: ./run.sh [help] [prerequisite] [reset] [test] [prod]"
+    echo "Available commands: ./run.sh [help] [prerequisite] [reset] [dev] [test] [prod]"
     echo "./run.sh prerequisite   check prerequisite"
     echo "./run.sh dev            run app in development local environment"
     echo "./run.sh prod           run app as production, frontend will be built into static file and served by Nginx"
@@ -55,7 +57,8 @@ reset_app() {
     sudo rm -rf node_modules packages/*/node_modules packages/*/dist
     sudo rm -f "${ROOT_PROJECT}/scripts/nginx/nginx-dev.conf"
     sudo rm -f "${ROOT_PROJECT}/scripts/nginx/nginx-prod.conf"
-    echo "node_modules, dist, nginx config files removed successfully !"
+    sudo docker volume remove postgres_data
+    echo "node_modules, dist, nginx config files, postgres_data volume removed successfully !"
 }
 
 # Function to run the application in production mode
@@ -75,7 +78,7 @@ run_dev() {
     mkdir -p node_modules
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" build --no-cache
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" up --remove-orphans -d
-    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" logs -f app-dev -f nginx-reverse-proxy-dev # Service name not container name
+    docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" logs -f app-dev -f postgres-db -f nginx-reverse-proxy-dev # Service name not container name
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.local.yml" down -t 1
 }
 

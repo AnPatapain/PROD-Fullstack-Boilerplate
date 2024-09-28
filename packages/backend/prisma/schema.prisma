@@ -1,0 +1,28 @@
+// Prisma schema file written in prisma DSL language. Its purpose is to define datasource, data driver (client)
+// and schema for the models. Please create .env file in the same folder as this file and put connection url to it
+// Author: Ke An NGUYEN
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  timeStamp DateTime
+  content String
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  name String?
+  messages Message[]
+}
