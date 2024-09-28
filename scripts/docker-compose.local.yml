@@ -14,7 +14,7 @@ services:
     build:
       context: .
       dockerfile_inline: |
-        FROM  node:18.18-alpine
+        FROM  node:18-alpine3.16
         RUN npm install -g pnpm
     volumes:
       - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
@@ -36,7 +36,7 @@ services:
       - POSTGRES_PASSWORD=qwerty
       - POSTGRES_DB=fullstack_boilerplate_db
     volumes:
-      - "${ROOT_PROJECT}/data:/var/lib/postgresql/data"
+      - postgres_data:/var/lib/postgresql/data
     user: "${DOCKER_UID}:${DOCKER_GID}"
 
 
@@ -51,3 +51,7 @@ services:
      - "80:80"
     depends_on:
       - app-dev
+
+volumes:
+  postgres_data:
+    name: postgres_data

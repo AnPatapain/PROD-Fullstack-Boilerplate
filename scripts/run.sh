@@ -32,8 +32,9 @@ cd "${ROOT_PROJECT}"
 display_help() {
     echo "Entry point command to run: development, production, test and reset your environment."
     echo "Reset means removing node_modules, build files"
-    echo "Available commands: ./run.sh [help] [prerequisite] [reset] [test] [prod]"
+    echo "Available commands: ./run.sh [help] [prerequisite] [reset] [create_tables] [dev] [test] [prod]"
     echo "./run.sh prerequisite   check prerequisite"
+    echo "./run.sh create_tables  create tables for database"
     echo "./run.sh dev            run app in development local environment"
     echo "./run.sh prod           run app as production, frontend will be built into static file and served by Nginx"
     echo "./run.sh reset          remove node_modules, build files (dist), nginx config files. These stuffs will be reinstalled if you run dev or prod"
@@ -70,6 +71,10 @@ run_prod() {
     docker compose -f "${ROOT_PROJECT}/scripts/docker-compose.prod.yml" down -t 1
 }
 
+create_tables() {
+    pnpm --filter backend run create_tables
+}
+
 # Function to start Docker Compose in development mode
 run_dev() {
     export DOCKER_APP_CMD="pnpm i && pnpm run dev"
@@ -91,6 +96,10 @@ elif [[ "$1" = "prerequisite" ]]; then
 
 elif [[ "$1" = "reset" ]]; then
     reset_app
+    exit 0
+
+elif [[ "$1" = "create_tables" ]]; then
+    create_tables
     exit 0
 
 elif [[ "$1" = "dev" ]]; then

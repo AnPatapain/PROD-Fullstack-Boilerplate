@@ -6,30 +6,31 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "-------- Dev scripts --------": "",
-    "dev": "nodemon --watch 'src/**/*' --ext ts --exec 'pnpm run build:tsoa && ts-node --project tsconfig.json src/server.ts'",
+    "dev": "prisma generate && nodemon --watch 'src/**/*' --ext ts --exec 'pnpm run build:tsoa && ts-node --project tsconfig.json src/server.ts'",
     "-------- Build scripts --------": "",
     "build:tsoa": "tsoa spec-and-routes",
     "build": "pnpm run build:tsoa && tsc --project tsconfig.build.json && node ../../scripts/post-backend-build.cjs",
     "-------- Prod scripts --------": "",
-    "prod": "ts-node --project tsconfig.build.json -r tsconfig-paths/register dist/backend/src/server.js"
+    "prod": "ts-node --project tsconfig.build.json -r tsconfig-paths/register dist/backend/src/server.js",
+    "-------- Other scripts --------": "",
+    "create_tables": "prisma migrate dev --name create_tables"
   },
   "dependencies": {
     "@app/models": "workspace:*",
     "@app/shared": "workspace:*",
+    "@prisma/client": "5.20.0",
     "@tsoa/runtime": "^6.4.0",
     "@types/express": "^4.17.21",
     "express": "^4.19.2",
-    "knex": "^3.1.0",
-    "pg": "^8.13.0",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "tsoa": "^6.4.0"
   },
   "devDependencies": {
-    "@types/knex": "^0.16.1",
     "@types/node": "^22.5.4",
     "@types/swagger-ui-express": "^4.1.6",
     "nodemon": "^3.1.0",
+    "prisma": "^5.20.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
   }
