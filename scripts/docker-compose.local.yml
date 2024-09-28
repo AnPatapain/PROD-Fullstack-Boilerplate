@@ -37,7 +37,6 @@ services:
       - POSTGRES_DB=fullstack_boilerplate_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    user: "${DOCKER_UID}:${DOCKER_GID}"
 
 
   nginx-reverse-proxy-dev:
