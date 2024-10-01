@@ -1,6 +1,6 @@
 # Backend Configuration
 
-This document provides an overview of the TypeScript configuration files used in the backend package.
+This document provides an overview of the backend configuration.
 
 ## TypeScript Configuration
 
