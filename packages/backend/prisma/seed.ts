@@ -1,9 +1,45 @@
 import { PrismaClient } from '@prisma/client'
 
-export const prisma = new PrismaClient();
+const PRISMA_CLIENT = new PrismaClient();
 
-export async function seed(prisma: PrismaClient) {
-    const createdUser = await prisma.user.create({
+const REPOS: Record<string, any> = {
+    user: PRISMA_CLIENT.user,
+}
+
+export async function seed() {
+    const oneOfReposIsEmpty = await checkOneOfReposIsEmpty();
+    if (oneOfReposIsEmpty) {
+        try {
+            await clean();
+            const user = await seedUser();
+            console.log("user created::", user);
+            const users = await PRISMA_CLIENT.user.findMany();
+            console.log("users queried::", users);
+            await PRISMA_CLIENT.$disconnect();
+        } catch(error) {
+            console.error(error);
+            await PRISMA_CLIENT.$disconnect();
+            process.exit(1);
+        }
+    }
+}
+
+export async function clean() {
+    for(const repo in REPOS) {
+        await REPOS[repo].deleteMany({});
+    }
+}
+
+async function checkOneOfReposIsEmpty() {
+    for (const repo in REPOS) {
+        const numsRecord = await REPOS[repo].count();
+        if (numsRecord === 0) return true;
+    }
+    return false;
+}
+
+async function seedUser() {
+    const createdUser = await PRISMA_CLIENT.user.create({
         data: {
             email: "nkalk192002@gmail.com",
             name: "kean",
@@ -18,7 +54,5 @@ export async function seed(prisma: PrismaClient) {
             messages: true,
         }
     });
-
-    const users = await prisma.user.findMany();
-    console.log("users queried::", users);
+    return createdUser;
 }
