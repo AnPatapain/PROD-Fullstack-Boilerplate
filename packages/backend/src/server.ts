@@ -2,7 +2,8 @@ import express, {json, Request, Response, urlencoded} from "express";
 import {RegisterRoutes} from "../tsoa/routes";
 import swaggerDocument from "../tsoa/swagger.json" assert {type: "json"};
 import swaggerUi from "swagger-ui-express";
-import {prisma, seed} from "../prisma/seed";
+import {seed} from "../prisma/seed";
+import {BACKEND_CONFIG} from "./BACKEND_CONFIG";
 
 const app = express();
 
@@ -18,18 +19,16 @@ app.use("/api/docs", swaggerUi.serve, async (_req: Request, res: Response) => {
         swaggerUi.generateHTML(swaggerDocument)
     );
 });
-
+// Register the routes and controller built by Tsoa to application
 RegisterRoutes(app);
 
-seed(prisma)
-    .then(async () => {
-        await prisma.$disconnect()
-    })
-    .catch(async (e) => {
-        console.error(e)
-        await prisma.$disconnect()
-        process.exit(1)
-    });
+// Check BACKEND_CONFIG
+console.log("Backend Config::", BACKEND_CONFIG);
+
+// Seed data (only in development environment)
+if (BACKEND_CONFIG.mode === 'development') {
+    await seed();
+}
 
 app.listen(8080, () => {
     console.log('Listening on port 8080');

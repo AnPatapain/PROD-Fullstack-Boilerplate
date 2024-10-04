@@ -18,11 +18,15 @@ services:
         RUN npm install -g pnpm
     volumes:
       - "${ROOT_PROJECT}:${ROOT_PROJECT}:Z"
-    command: sh -c "cd ${ROOT_PROJECT} && ${DOCKER_APP_CMD}"
+    command: sh -c "cd ${ROOT_PROJECT} && ${DOCKER_DEV_ENTRY_CMD}"
+    environment:
+      - NODE_ENV=development
     ports:
       - "3000:3000"
       - "8080:8080"
     user: "${DOCKER_UID}:${DOCKER_GID}"
+    depends_on:
+      - postgres-db
 
   postgres-db:
     image: postgres:14-alpine
@@ -31,10 +35,8 @@ services:
     shm_size: 128mb
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=qwerty
-      - POSTGRES_DB=fullstack_boilerplate_db
+    env_file:
+      - "../.env"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

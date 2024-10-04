@@ -17,6 +17,7 @@ scripts/nginx/nginx-dev.conf
 scripts/nginx/nginx-prod.conf
 data
 packages/backend/.env
+.env
 
 # Editor directories and files
 .vscode/*
