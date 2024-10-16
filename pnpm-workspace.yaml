@@ -5,5 +5,3 @@
 packages:
   - 'packages/backend'   # Package contains backend code
   - 'packages/frontend'  # Package contains frontend code
-  - 'packages/models'    # Package contains models code to be used by backend and frontend packages
-  - 'packages/shared'    # Package contains shared code to be used by backend and frontend packages

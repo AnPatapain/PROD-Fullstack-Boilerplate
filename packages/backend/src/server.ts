@@ -2,8 +2,8 @@ import express, {json, Request, Response, urlencoded} from "express";
 import {RegisterRoutes} from "../tsoa/routes";
 import swaggerDocument from "../tsoa/swagger.json" assert {type: "json"};
 import swaggerUi from "swagger-ui-express";
-import {seed} from "../prisma/seed";
-import {BACKEND_CONFIG} from "./BACKEND_CONFIG";
+import {seed} from "./seed";
+import {BackendConfig} from "./backendConfig";
 
 const app = express();
 
@@ -22,11 +22,11 @@ app.use("/api/docs", swaggerUi.serve, async (_req: Request, res: Response) => {
 // Register the routes and controller built by Tsoa to application
 RegisterRoutes(app);
 
-// Check BACKEND_CONFIG
-console.log("Backend Config::", BACKEND_CONFIG);
+// Check BackendConfig
+console.log("Backend Config::", BackendConfig);
 
 // Seed data (only in development environment)
-if (BACKEND_CONFIG.mode === 'development') {
+if (BackendConfig.mode === 'development') {
     await seed();
 }
 

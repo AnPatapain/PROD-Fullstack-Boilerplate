@@ -1,8 +1,9 @@
-import {Message} from "@app/models/src/Message.ts";
+import {User} from "./DTO/User.ts";
 
 export const apiClient = {
-    message: {
-        getSampleMessage: (): Promise<Message> => sendRequest('GET', '/api/messages/sample'),
+    user: {
+        getAll: (): Promise<Array<User>> => sendRequest('GET', '/api/users'),
+        getOneById: (id: number ): Promise<User> => sendRequest('GET', `/api/users/${id}`),
     }
 }
 

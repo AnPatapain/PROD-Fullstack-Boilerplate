@@ -3,7 +3,7 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { TsoaRoute, fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { SampleController } from './../src/controllers/sample.controller';
+import { UserController } from './../src/controllers/UserController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -14,8 +14,21 @@ const models: TsoaRoute.Models = {
     "Message": {
         "dataType": "refObject",
         "properties": {
+            "id": {"dataType":"double","required":true},
+            "userId": {"dataType":"double","required":true},
             "timeStamp": {"dataType":"datetime","required":true},
             "content": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "User": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "email": {"dataType":"string","required":true},
+            "name": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}],"required":true},
+            "messages": {"dataType":"array","array":{"dataType":"refObject","ref":"Message"},"required":true},
         },
         "additionalProperties": false,
     },
@@ -37,11 +50,11 @@ export function RegisterRoutes(app: Router) {
 
 
     
-        app.get('/api/messages/sample',
-            ...(fetchMiddlewares<RequestHandler>(SampleController)),
-            ...(fetchMiddlewares<RequestHandler>(SampleController.prototype.getSampleMessage)),
+        app.get('/api/users',
+            ...(fetchMiddlewares<RequestHandler>(UserController)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getUsers)),
 
-            async function SampleController_getSampleMessage(request: ExRequest, response: ExResponse, next: any) {
+            async function UserController_getUsers(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
@@ -51,10 +64,10 @@ export function RegisterRoutes(app: Router) {
             try {
                 validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
-                const controller = new SampleController();
+                const controller = new UserController();
 
               await templateService.apiHandler({
-                methodName: 'getSampleMessage',
+                methodName: 'getUsers',
                 controller,
                 response,
                 next,
@@ -66,12 +79,13 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/api/messages',
-            ...(fetchMiddlewares<RequestHandler>(SampleController)),
-            ...(fetchMiddlewares<RequestHandler>(SampleController.prototype.getMessages)),
+        app.get('/api/users/:userId',
+            ...(fetchMiddlewares<RequestHandler>(UserController)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getUsersById)),
 
-            async function SampleController_getMessages(request: ExRequest, response: ExResponse, next: any) {
+            async function UserController_getUsersById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    userId: {"in":"path","name":"userId","required":true,"dataType":"double"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -80,40 +94,10 @@ export function RegisterRoutes(app: Router) {
             try {
                 validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
-                const controller = new SampleController();
+                const controller = new UserController();
 
               await templateService.apiHandler({
-                methodName: 'getMessages',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: undefined,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/api/messages/:messageId',
-            ...(fetchMiddlewares<RequestHandler>(SampleController)),
-            ...(fetchMiddlewares<RequestHandler>(SampleController.prototype.getMessageById)),
-
-            async function SampleController_getMessageById(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    messageId: {"in":"path","name":"messageId","required":true,"dataType":"double"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new SampleController();
-
-              await templateService.apiHandler({
-                methodName: 'getMessageById',
+                methodName: 'getUsersById',
                 controller,
                 response,
                 next,

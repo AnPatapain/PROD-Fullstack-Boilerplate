@@ -9,6 +9,14 @@
 		"schemas": {
 			"Message": {
 				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
+					},
 					"timeStamp": {
 						"type": "string",
 						"format": "date-time"
@@ -18,8 +26,39 @@
 					}
 				},
 				"required": [
+					"id",
+					"userId",
 					"timeStamp",
 					"content"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"User": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"messages": {
+						"items": {
+							"$ref": "#/components/schemas/Message"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"email",
+					"name",
+					"messages"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -33,28 +72,9 @@
 		"contact": {}
 	},
 	"paths": {
-		"/api/messages/sample": {
+		"/api/users": {
 			"get": {
-				"operationId": "GetSampleMessage",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Message"
-								}
-							}
-						}
-					}
-				},
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/api/messages": {
-			"get": {
-				"operationId": "GetMessages",
+				"operationId": "GetUsers",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -62,7 +82,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Message"
+										"$ref": "#/components/schemas/User"
 									},
 									"type": "array"
 								}
@@ -70,30 +90,37 @@
 						}
 					}
 				},
+				"description": "Retrieves a list of all users",
 				"security": [],
 				"parameters": []
 			}
 		},
-		"/api/messages/{messageId}": {
+		"/api/users/{userId}": {
 			"get": {
-				"operationId": "GetMessageById",
+				"operationId": "GetUsersById",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Message"
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/User"
+										}
+									],
+									"nullable": true
 								}
 							}
 						}
 					}
 				},
+				"description": "Retrieves user by userId",
 				"security": [],
 				"parameters": [
 					{
 						"in": "path",
-						"name": "messageId",
+						"name": "userId",
 						"required": true,
 						"schema": {
 							"format": "double",

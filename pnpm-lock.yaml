@@ -20,12 +20,6 @@ importers:
 
   packages/backend:
     dependencies:
-      '@app/models':
-        specifier: workspace:*
-        version: link:../models
-      '@app/shared':
-        specifier: workspace:*
-        version: link:../shared
       '@prisma/client':
         specifier: 5.20.0
         version: 5.20.0(prisma@5.20.0)
@@ -44,9 +38,6 @@ importers:
       swagger-ui-express:
         specifier: ^5.0.1
         version: 5.0.1(express@4.19.2)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@22.5.4)(typescript@5.4.5)
       tsoa:
         specifier: ^6.4.0
         version: 6.4.0
@@ -63,21 +54,15 @@ importers:
       prisma:
         specifier: ^5.20.0
         version: 5.20.0
-      tsconfig-paths:
-        specifier: ^4.2.0
-        version: 4.2.0
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@22.5.4)(typescript@5.4.5)
       typescript:
         specifier: ^5.2.2
         version: 5.4.5
 
   packages/frontend:
     dependencies:
-      '@app/models':
-        specifier: workspace:*
-        version: link:../models
-      '@app/shared':
-        specifier: workspace:*
-        version: link:../shared
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -103,14 +88,6 @@ importers:
       vite:
         specifier: ^5.2.0
         version: 5.2.10(@types/node@22.5.4)
-
-  packages/models: {}
-
-  packages/shared:
-    dependencies:
-      '@app/models':
-        specifier: workspace:*
-        version: link:../models
 
 packages:
 
@@ -1733,10 +1710,6 @@ packages:
     resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==}
     engines: {node: '>=12'}
 
-  strip-bom@3.0.0:
-    resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
-    engines: {node: '>=4'}
-
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
@@ -1808,10 +1781,6 @@ packages:
         optional: true
       '@swc/wasm':
         optional: true
-
-  tsconfig-paths@4.2.0:
-    resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
-    engines: {node: '>=6'}
 
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
@@ -3743,8 +3712,6 @@ snapshots:
     dependencies:
       ansi-regex: 6.1.0
 
-  strip-bom@3.0.0: {}
-
   strip-json-comments@3.1.1: {}
 
   supports-color@5.5.0:
@@ -3805,12 +3772,6 @@ snapshots:
       typescript: 5.4.5
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-
-  tsconfig-paths@4.2.0:
-    dependencies:
-      json5: 2.2.3
-      minimist: 1.2.8
-      strip-bom: 3.0.0
 
   tslib@2.6.2: {}
 
