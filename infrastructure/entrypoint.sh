@@ -108,6 +108,7 @@ list_prerequisite() {
 check_prerequisite() {
   # Check docker is installed and can be run as non-root user
   command -v docker >/dev/null 2>&1 || { echo >&2 "Docker is required. Please install"; exit 1; }
+  docker compose version >/dev/null 2>&1 || { echo >&2 "Docker Compose Plugin is required. Please install: https://docs.docker.com/compose/install/"; exit 1; }
   if ! groups "$USER" | grep &>/dev/null '\bdocker\b'; then
     echo "Result: Prerequisites are not met!"
     echo ""
