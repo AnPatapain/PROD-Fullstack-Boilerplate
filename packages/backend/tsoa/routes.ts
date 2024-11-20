@@ -4,7 +4,7 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { ColumnController } from './../src/controllers/ColumnController';
+import { UserController } from './../src/controllers/UserController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -12,39 +12,26 @@ import type { Request as ExRequest, Response as ExResponse, RequestHandler, Rout
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "Card": {
+    "Message": {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
-            "columnId": {"dataType":"double","required":true},
-            "description": {"dataType":"string","required":true},
+            "userId": {"dataType":"double","required":true},
+            "timeStamp": {"dataType":"datetime","required":true},
+            "content": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Column": {
+    "User": {
         "dataType": "refObject",
         "properties": {
             "id": {"dataType":"double","required":true},
-            "columnName": {"dataType":"string","required":true},
-            "cards": {"dataType":"array","array":{"dataType":"refObject","ref":"Card"},"required":true},
+            "email": {"dataType":"string","required":true},
+            "name": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}],"required":true},
+            "messages": {"dataType":"array","array":{"dataType":"refObject","ref":"Message"},"required":true},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_Column.Exclude_keyofColumn.id-or-cards__": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"columnName":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Omit_Column.id-or-cards_": {
-        "dataType": "refAlias",
-        "type": {"ref":"Pick_Column.Exclude_keyofColumn.id-or-cards__","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ColumnCreationRequest": {
-        "dataType": "refAlias",
-        "type": {"ref":"Omit_Column.id-or-cards_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -64,11 +51,11 @@ export function RegisterRoutes(app: Router) {
 
 
     
-        app.get('/api/column',
-            ...(fetchMiddlewares<RequestHandler>(ColumnController)),
-            ...(fetchMiddlewares<RequestHandler>(ColumnController.prototype.getColumns)),
+        app.get('/api/users',
+            ...(fetchMiddlewares<RequestHandler>(UserController)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getUsers)),
 
-            async function ColumnController_getColumns(request: ExRequest, response: ExResponse, next: any) {
+            async function UserController_getUsers(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
             };
 
@@ -78,10 +65,10 @@ export function RegisterRoutes(app: Router) {
             try {
                 validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
-                const controller = new ColumnController();
+                const controller = new UserController();
 
               await templateService.apiHandler({
-                methodName: 'getColumns',
+                methodName: 'getUsers',
                 controller,
                 response,
                 next,
@@ -93,13 +80,13 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/api/column',
-            ...(fetchMiddlewares<RequestHandler>(ColumnController)),
-            ...(fetchMiddlewares<RequestHandler>(ColumnController.prototype.createColumn)),
+        app.get('/api/users/:userId',
+            ...(fetchMiddlewares<RequestHandler>(UserController)),
+            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getUsersById)),
 
-            async function ColumnController_createColumn(request: ExRequest, response: ExResponse, next: any) {
+            async function UserController_getUsersById(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    requestBody: {"in":"body","name":"requestBody","required":true,"ref":"ColumnCreationRequest"},
+                    userId: {"in":"path","name":"userId","required":true,"dataType":"double"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -108,40 +95,10 @@ export function RegisterRoutes(app: Router) {
             try {
                 validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
-                const controller = new ColumnController();
+                const controller = new UserController();
 
               await templateService.apiHandler({
-                methodName: 'createColumn',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: undefined,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/api/column/:columnId',
-            ...(fetchMiddlewares<RequestHandler>(ColumnController)),
-            ...(fetchMiddlewares<RequestHandler>(ColumnController.prototype.getColumnById)),
-
-            async function ColumnController_getColumnById(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    columnId: {"in":"path","name":"columnId","required":true,"dataType":"double"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new ColumnController();
-
-              await templateService.apiHandler({
-                methodName: 'getColumnById',
+                methodName: 'getUsersById',
                 controller,
                 response,
                 next,

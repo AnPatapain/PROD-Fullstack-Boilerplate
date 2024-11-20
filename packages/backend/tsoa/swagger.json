@@ -7,70 +7,61 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Card": {
+			"Message": {
 				"properties": {
 					"id": {
 						"type": "number",
 						"format": "double"
 					},
-					"columnId": {
+					"userId": {
 						"type": "number",
 						"format": "double"
 					},
-					"description": {
+					"timeStamp": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"content": {
 						"type": "string"
 					}
 				},
 				"required": [
 					"id",
-					"columnId",
-					"description"
+					"userId",
+					"timeStamp",
+					"content"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Column": {
+			"User": {
 				"properties": {
 					"id": {
 						"type": "number",
 						"format": "double"
 					},
-					"columnName": {
+					"email": {
 						"type": "string"
 					},
-					"cards": {
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"messages": {
 						"items": {
-							"$ref": "#/components/schemas/Card"
+							"$ref": "#/components/schemas/Message"
 						},
 						"type": "array"
 					}
 				},
 				"required": [
 					"id",
-					"columnName",
-					"cards"
+					"email",
+					"name",
+					"messages"
 				],
 				"type": "object",
 				"additionalProperties": false
-			},
-			"Pick_Column.Exclude_keyofColumn.id-or-cards__": {
-				"properties": {
-					"columnName": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"columnName"
-				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
-			},
-			"Omit_Column.id-or-cards_": {
-				"$ref": "#/components/schemas/Pick_Column.Exclude_keyofColumn.id-or-cards__",
-				"description": "Construct a type with the properties of T except for those in type K."
-			},
-			"ColumnCreationRequest": {
-				"$ref": "#/components/schemas/Omit_Column.id-or-cards_"
 			}
 		},
 		"securitySchemes": {}
@@ -81,9 +72,9 @@
 		"contact": {}
 	},
 	"paths": {
-		"/api/column": {
+		"/api/users": {
 			"get": {
-				"operationId": "GetColumns",
+				"operationId": "GetUsers",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -91,7 +82,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Column"
+										"$ref": "#/components/schemas/User"
 									},
 									"type": "array"
 								}
@@ -102,39 +93,11 @@
 				"description": "Retrieves a list of all users",
 				"security": [],
 				"parameters": []
-			},
-			"post": {
-				"operationId": "CreateColumn",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Column"
-								}
-							}
-						}
-					}
-				},
-				"description": "Create new column",
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/ColumnCreationRequest"
-							}
-						}
-					}
-				}
 			}
 		},
-		"/api/column/{columnId}": {
+		"/api/users/{userId}": {
 			"get": {
-				"operationId": "GetColumnById",
+				"operationId": "GetUsersById",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -143,7 +106,7 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/Column"
+											"$ref": "#/components/schemas/User"
 										}
 									],
 									"nullable": true
@@ -157,7 +120,7 @@
 				"parameters": [
 					{
 						"in": "path",
-						"name": "columnId",
+						"name": "userId",
 						"required": true,
 						"schema": {
 							"format": "double",
