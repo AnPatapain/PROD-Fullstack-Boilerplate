@@ -13,10 +13,15 @@
   "dependencies": {
     "@app/shared-utils": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.13",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@types/node": "^22.5.4",
     "@types/react": "^18.2.66",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react": "^4.2.1",
