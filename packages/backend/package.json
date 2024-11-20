@@ -6,15 +6,16 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "-------- Dev scripts --------": "",
-    "dev": "pnpm run prisma:create_tables && pnpm run prisma:generate_client && nodemon --watch 'src/**/*' --ext ts --exec 'pnpm run build:tsoa && ts-node --project tsconfig.json src/server.ts'",
+    "dev": "pnpm run prisma:init && nodemon --watch 'src/**/*' --ext ts --exec 'pnpm run build:tsoa && ts-node --project tsconfig.json src/server.ts'",
     "-------- Build scripts --------": "",
     "build:tsoa": "tsoa spec-and-routes",
-    "build": "pnpm run prisma:create_tables && pnpm run prisma:generate_client && pnpm run build:tsoa && tsc --project tsconfig.build.json && node ../../infrastructure/utils-scripts/post-backend-build.cjs",
+    "build": "pnpm run prisma:init && pnpm run build:tsoa && tsc --project tsconfig.build.json && node ../../infrastructure/utils-scripts/post-backend-build.cjs",
     "-------- Prod scripts --------": "",
     "prod": "node dist/src/server.js",
     "-------- Other scripts --------": "",
     "prisma:create_tables": "prisma migrate dev --name create_tables",
-    "prisma:generate_client": "prisma generate"
+    "prisma:generate_client": "prisma generate",
+    "prisma:init": "pnpm run prisma:create_tables & pnpm run prisma:generate_client"
   },
   "dependencies": {
     "@app/shared-utils": "workspace:*",

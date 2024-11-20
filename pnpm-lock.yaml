@@ -100,7 +100,11 @@ importers:
 
   packages/shared-models: {}
 
-  packages/shared-utils: {}
+  packages/shared-utils:
+    dependencies:
+      '@app/shared-models':
+        specifier: workspace:*
+        version: link:../shared-models
 
 packages:
 
