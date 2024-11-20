@@ -1,4 +1,4 @@
-# Official Todo App
+# Official Fullstack Skeleton
 ![Docker](https://img.shields.io/badge/docker-27.3.1-green)
 ![Nginx](https://img.shields.io/badge/nginx-alpine-green)
 ![Typescript](https://img.shields.io/badge/typescript-5.2.2-green.svg)
@@ -10,11 +10,18 @@
 ![Tsoa 6.x.x](https://img.shields.io/badge/tsoa-6.4.0-green.svg)
 ![Swagger 5.x.x](https://img.shields.io/badge/swagger_api_docs-5.0.1-green.svg)
 
-This project is a production-ready fullstack Todo web application setup. We use `pnpm workspace` to
-set up mono repo.
+This project provides a production-ready fullstack web application setup. It 
+includes infrastructure for containerization (via Docker), reverse proxy 
+(using Nginx), and core features like user authentication, authorization, 
+and automatic API documentation. An automated testing system is also implemented 
+for unit tests, end-to-end tests (E2E), and performance tests.
+
+By using Docker, the project manages development, testing, and production 
+environments, minimizing dependencies on your host machine. 
+Simply install Docker, and you're ready to go.
 
 
-**Tech-stack overview**
+**Fullstack Skeleton overview**
 - **Infrastructure:** Nginx, Docker, TLS-SSL for local development environment
 - **Architecture:** Layered architecture for backend
 - **Programming paradigms:** OOP for backend, Functional Programming for frontend using React
@@ -25,6 +32,7 @@ set up mono repo.
 ## Table of Contents
 - [Project structure](#project-structure)
 - [How to run](#how-to-run)
+- [Configuration](#configuration)
 - [Architecture](#architecture-)
 - [TODO](#todo)
 
@@ -63,22 +71,18 @@ the folder `packages/` has also its own package.json
 In addition
 
 ## How to run
-From root project, `./infrastructure/run.sh` is the entry point 
+From root project, `./scripts/run.sh` is the entry point 
 command to run different environments: development, production, test, 
 reset environment, etc.
 #### Manual
-To see all options of the command `./infrastructure/run.sh` run:
+To see all options of the command `./scripts/run.sh` run:
 ``` bash
-./infrastructure/run.sh --help
+./scripts/run.sh --help
 ```
 #### Check prerequisite installed
-To list all prerequisite. Run:
+To check whether your environment has the prerequisite to run the boilerplate. Run
 ``` bash
-./infrastructure/run.sh list-prerequisite
-```
-To check prerequisite on your environment. Run:
-``` bash
-./infrastructure/run.sh prerequisite
+./scripts/run.sh prerequisite
 ```
 #### Development
 In development mode: 
@@ -90,7 +94,7 @@ in run-time by ts-node
 
 To run development mode
 ``` bash
-./infrastructure/run.sh dev
+./scripts/run.sh dev
 ```
 #### Production
 In production mode:
@@ -100,18 +104,18 @@ In production mode:
 
 To run application in production mode
 ``` bash
-./infrastructure/run.sh prod
+./scripts/run.sh prod
 ```
-#### Clean
-To clean application environment.
+#### Reset
+To reset application environment.
 ``` bash
-./infrastructure/run.sh clean
-```
-Best practice: Always run ```./infrastructure/run.sh clean``` before running 
-```./infrastructure/run.sh dev``` and ```./infrastructure/run.sh prod```
+./scripts/run.sh reset
+```  
+Best practice: Always run ```./scripts/run.sh reset``` before running ```./scripts/run.sh dev``` and ```./scripts/run.sh prod``` to avoid weird errors.
 
 #### Install package
-Best practice: Run `./infrastructure/run.sh clean` before running any below commands
+Best practice: Run `./scripts/run.sh reset` before running any commands
+bellow
 
 
 To install every dependencies listed in packages/*/package.json
@@ -120,12 +124,27 @@ pnpm install
 ```  
 To install dev-dependency for specific package
 ``` bash
-pnpm --filter <backend | frontend | shared-utils | shared-models> add --save-dev <package>
+pnpm --filter <backend | frontend | shared | models> add --save-dev <package>
 ```  
 
 To install dependency for specific package
 ``` bash
-pnpm --filter <backend | frontend | shared-utils | shared-models> add <package>
+pnpm --filter <backend | frontend | shared | models> add <package>
+```  
+
+## Configuration
+To change the name of docker containers, go to scripts/run.sh and changes the values of these variables:
+``` bash
+#!/bin/bash
+
+# Define the container name for dev local
+export APP_DEV_CONTAINER="app-dev"
+export NGINX_REVERSE_PROXY_DEV_CONTAINER="nginx-reverse-proxy-dev"
+
+# Define the container name for production
+export BACKEND_PROD_CONTAINER="backend-prod" 
+export NGINX_REVERSE_PROXY_PROD_CONTAINER="nginx-reverse-proxy-prod"
+...
 ```
 
 ## Architecture  
