@@ -1,16 +1,17 @@
-import {UserRepository} from "./repositories/UserRepository";
+import {ColumnRepo} from "./repositories/ColumnRepo";
 
-const userRepository = UserRepository.getInstance();
+
+const columnRepo = ColumnRepo.getInstance();
 
 const RepositoryToBeSeeded = [
-    userRepository,
+    columnRepo,
 ]
 
 export async function seed() {
     const oneOfReposIsEmpty = await checkOneOfReposIsEmpty();
     if (oneOfReposIsEmpty) {
         await clean();
-        await seedUser();
+        await seedColumn();
     }
 }
 
@@ -28,14 +29,8 @@ async function checkOneOfReposIsEmpty() {
     return false;
 }
 
-async function seedUser() {
-    await userRepository.createOne({
-        email: "nkalk192002@gmail.com",
-        name: "kean"
-    });
-
-    await userRepository.createOne({
-        email: "tuan.nguyen@gmail.com",
-        name: "tupac",
+async function seedColumn() {
+    await columnRepo.createOne({
+        columnName: "To Do"
     });
 }

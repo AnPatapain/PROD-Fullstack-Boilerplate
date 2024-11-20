@@ -7,6 +7,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@app/shared-models": "workspace:*"
   },
   "devDependencies": {
   }

@@ -12,17 +12,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Message {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  timeStamp DateTime
-  content   String
+model Column {
+  id         Int    @id @default(autoincrement())
+  columnName String
+  cards      Card[]
 }
 
-model User {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
-  name     String?
-  messages Message[]
+model Card {
+  id          Int    @id @default(autoincrement())
+  description String
+  Column      Column @relation(fields: [columnId], references: [id])
+  columnId    Int // Relation scalar field (used in `@relation` attribute avove)
 }
