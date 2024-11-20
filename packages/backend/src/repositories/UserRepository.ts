@@ -1,6 +1,6 @@
 import {PRISMA_CLIENT} from "../../prisma";
-import {User, UserCreation} from "../models/User";
 import {IRepository} from "./IRepository";
+import {User, UserCreation} from "@app/shared-models/src/User";
 
 export class UserRepository implements IRepository<User>{
     private static instance: UserRepository | null = null;

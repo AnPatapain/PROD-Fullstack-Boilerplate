@@ -17,6 +17,8 @@
     "prisma:generate_client": "prisma generate"
   },
   "dependencies": {
+    "@app/shared-utils": "workspace:*",
+    "@app/shared-models": "workspace:*",
     "@prisma/client": "5.20.0",
     "@tsoa/runtime": "^6.4.0",
     "@types/express": "^4.17.21",

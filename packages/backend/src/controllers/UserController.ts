@@ -1,7 +1,7 @@
 import {Controller, Get, Path, Route} from "tsoa";
-import {User} from "../models/User";
 import {IRepository} from "../repositories/IRepository";
 import {UserRepository} from "../repositories/UserRepository";
+import {User} from "@app/shared-models/src/User";
 
 @Route("/api/users")
 export class UserController extends Controller {

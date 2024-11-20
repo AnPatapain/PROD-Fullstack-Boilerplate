@@ -5,3 +5,5 @@
 packages:
   - 'packages/backend'   # Package contains backend code
   - 'packages/frontend'  # Package contains frontend code
+  - 'packages/shared-utils' # Package contains shared-utils utils, shared-utils type (API request type) for backend & frontend
+  - 'packages/shared-models' # Package contains models of application

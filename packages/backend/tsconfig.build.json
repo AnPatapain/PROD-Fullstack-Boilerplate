@@ -4,6 +4,8 @@
     "module": "ESNext",
     "outDir": "./dist",
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@app/shared/src/*": ["../shared/src/*"]
+    }
   },
 }
