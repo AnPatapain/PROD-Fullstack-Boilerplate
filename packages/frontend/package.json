@@ -11,8 +11,7 @@
     "build": "tsc --project tsconfig.json && vite build"
   },
   "dependencies": {
-    "@app/models": "workspace:*",
-    "@app/shared": "workspace:*",
+    "@app/shared-utils": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

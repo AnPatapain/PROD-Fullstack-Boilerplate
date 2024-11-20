@@ -1,61 +1,74 @@
-# Fullstack boilerplate - Production ready
-![](./static/Heros-Vasnetsov.jpg)  
-Bonjour 👋, to save time for you, stop reading here if you don't use Linux.
-This repo is for Linux only because we use Docker, Bash script, which can not run natively on Windows.
-## Who & Why
-For who ?  
-Got a brilliant project idea and can't wait to build the MVP ? Tired of spending weeks on the boring stuffs kind of project setup, configuration, 
-user authentication, API docs, etc. ?  
-This repo is your production-ready start point. It handles the mundane
-so that you can focus on what really matters: your project's unique feature and
-the business logic. So in short: **Want to turn out the idea into product quickly ? This repo is for you**.
+# Official Fullstack Skeleton
+![Docker](https://img.shields.io/badge/docker-27.3.1-green)
+![Nginx](https://img.shields.io/badge/nginx-alpine-green)
+![Typescript](https://img.shields.io/badge/typescript-5.2.2-green.svg)
+![Node 18](https://img.shields.io/badge/node-18_alpine-green)
+![Express 4.x.x](https://img.shields.io/badge/express-4.19.2-green.svg)
+![React 18](https://img.shields.io/badge/react-18.2.0-green.svg)
+![Postgresql 14](https://img.shields.io/badge/postgresql-14_alpine-green.svg)
+![Prisma 5.x.x](https://img.shields.io/badge/prisma-5.20.0-green.svg)
+![Tsoa 6.x.x](https://img.shields.io/badge/tsoa-6.4.0-green.svg)
+![Swagger 5.x.x](https://img.shields.io/badge/swagger_api_docs-5.0.1-green.svg)
 
-Why to use ?  
-This boilerplate all-in-one solution, single code base for both frontend 
-and backend. No need to juggle multiple repos or deal with complex setups 
-(Two codebases organize teams, not code). In short: **You dev, the boilerplate handle the rest**.
+This project provides a production-ready fullstack web application setup. It 
+includes infrastructure for containerization (via Docker), reverse proxy 
+(using Nginx), and core features like user authentication, authorization, 
+and automatic API documentation. An automated testing system is also implemented 
+for unit tests, end-to-end tests (E2E), and performance tests.
 
-## What
-This boilerplate leverages a workspace multi-package style to hold both backend and
-frontend in the single code base (**Mono repo**). Using Docker, we ensure **it works on my machine and yours**. Nginx serves 
-as a robust reverse proxy, managing frontend and backend requests 
-seamlessly. In short:  
-**All-in-one codebase. Streamlined setup. Focused development.**
+By using Docker, the project manages development, testing, and production 
+environments, minimizing dependencies on your host machine. 
+Simply install Docker, and you're ready to go.
+
+
+**Fullstack Skeleton overview**
+- **Infrastructure:** Nginx, Docker, TLS-SSL for local development environment
+- **Architecture:** Layered architecture for backend
+- **Programming paradigms:** OOP for backend, Functional Programming for frontend using React
+- **Automation Test (TODO: nyi):** Unit Test, End-to-End test (E2E), Performance Test
+- **Programming Language:** Typescript, Bash Script
+- **Backend:** Express (server framework), Tsoa-Swagger(controller & auto API docs), Postgresql (relational database), Prisma (ORM) 
+- **Frontend:** React
 ## Table of Contents
-- [Project structure & Tech stack](#project-structure--tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
+- [Project structure](#project-structure)
 - [How to run](#how-to-run)
 - [Configuration](#configuration)
-- [TLS setup](#tls-setup)
 - [Architecture](#architecture-)
 - [TODO](#todo)
 
-## Project structure & Tech stack
-![Packages](static/packages.png)
+
+## Project structure
 This boilerplate use **pnpm**, a package manager to set up a workspace 
-multi-package which contains these packages:
-- **Backend (packages/backend)**: Powered by Node.js and Express, written in TypeScript.
-- **Frontend (packages/frontend)**: Built with React, Vite, and TypeScript.
-- **Shared (packages/shared)**: Common utilities and types shared between frontend and backend.
-- **Models (packages/models)**: Data models shared between Backend and Frontend.
+multi-package.
+- **packages/**  
+  Sub-packages for different project aspects (backend, frontend, etc.).
 
+- **infrastructure/**  
+  Contain entrypoint for running application and the files for infrastructure set up: Container (Docker), 
+Reverse Proxy (Nginx), local TLS-SSL certificates.
+
+- **static/**  
+  Images for Docs.
+
+- **.dockerignore**  
+  Specifies files ignored by Docker; handles HTTPS via Nginx.
+
+- **.gitignore**  
+  Lists files not tracked by Git.
+
+- **README.md**  
+  Project overview, setup instructions, and docs.
+
+- **package.json**  
+  Defines global project dependencies and scripts (using `pnpm`). Each package inside
+the folder `packages/` has also its own package.json
+
+- **pnpm-lock.yaml**  
+  Lock file ensuring consistent dependency versions.
+
+- **pnpm-workspace.yaml**  
+  Workspace settings for managing monorepo with `pnpm`.
 In addition
-- **Scripts (scripts/run.sh)**: Controls the execution of the application, 
-managing development and production workflows.
-
-## Prerequisites
-- **Docker**: Must be installed and runnable as a non-root user.
-  - [Install Docker on Linux](https://docs.docker.com/engine/install/ubuntu/)
-  - [Run Docker as non-root user](https://docs.docker.com/engine/install/linux-postinstall/)
-
-- **pnpm**:
-  - [Install pnpm on Linux](https://pnpm.io/installation)
-## Installation
-```
-git clone https://github.com/AnPatapain/production-fullstack-boilerplate.git  
-cd production-fullstack-boilerplate
-```
 
 ## How to run
 From root project, `./scripts/run.sh` is the entry point 
@@ -70,25 +83,19 @@ To see all options of the command `./scripts/run.sh` run:
 To check whether your environment has the prerequisite to run the boilerplate. Run
 ``` bash
 ./scripts/run.sh prerequisite
-```  
-This will:
-- Check whether Docker installed, if so, check whether Docker can be run as non-root user
-- Check whether pnpm installed.
+```
 #### Development
 In development mode: 
 - Frontend is served by Vite server with hot module reload
 - Typescript files will not be pre-transpiled to javascript but be transpiled
 in run-time by ts-node
-- [Not yet implemented] Mock data seed for development
-- [Not yet implemented] Fake email smtp server
+- Mock data seed for development
+- Fake email smtp server
 
 To run development mode
 ``` bash
 ./scripts/run.sh dev
-```  
-This will:
-- Build and start Docker container for backend, frontend (both in one container)
-- Build and start Docker container for Nginx as Reverse Proxy to handle backend and frontend request.
+```
 #### Production
 In production mode:
 - Frontend is built to single javascript file and served by Nginx
@@ -98,12 +105,7 @@ In production mode:
 To run application in production mode
 ``` bash
 ./scripts/run.sh prod
-```  
-This will:
-- Build frontend static files, transpile backend from typescript to javascript
-- Build and start Docker container to run backend process
-- Build and start Docker container for Nginx as Reverse Proxy to handle 
-backend and frontend request. The frontend now is served as static file by Nginx inside this container
+```
 #### Reset
 To reset application environment.
 ``` bash
@@ -143,11 +145,6 @@ export NGINX_REVERSE_PROXY_DEV_CONTAINER="nginx-reverse-proxy-dev"
 export BACKEND_PROD_CONTAINER="backend-prod" 
 export NGINX_REVERSE_PROXY_PROD_CONTAINER="nginx-reverse-proxy-prod"
 ...
-```
-## TLS Setup
-Place your TLS certificates and private key to folder scripts/tls-dev or run ```./scripts/tls-cert-key-creation.sh``` to create them.
-```
-./scripts/tls-cert-key-creation.sh --help
 ```
 
 ## Architecture  

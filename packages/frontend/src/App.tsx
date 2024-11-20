@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "./api-client";
-import {Message} from "@app/models/src/Message.ts";
-import {getPrintableMessage} from "@app/shared/src/utils.ts";
+import {User} from "./DTO/User.ts";
 
 export const App = () => {
-    const [message, setMessage] = useState<Message | ''>('');
+    const [users, setUsers] = useState<User[]>([]);
     
     useEffect(() => {
         const fetchData = async () => {
-           const data = await apiClient.message.getSampleMessage();
-           setMessage(data);
+           const users_ = await apiClient.user.getAll();
+           setUsers(users_);
         };
         fetchData();
     }, [])
 
     return <div>
         <h3>Fullstack mern boilerplate powered by: Typescript, Node, React, Docker, Nginx, BashScript.</h3>
-        <p>You dev, boilerplate handles the rest</p>
-        {message ? getPrintableMessage(message) : 'Loading message from backend...'}
+        <p>Users from API</p>
+        {users.length === 0 ? 'Loading message from backend...' :
+        <ul>
+            {users.map((user) => <li>id: {user.id} - email: {user.email} - name: {user.name}</li>)}
+        </ul>}
     </div>
 }
 
