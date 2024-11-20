@@ -1,10 +1,9 @@
 
-import { ColumnContainer, ColumnTitle, DeleteButton } from "../styles";
+import { ColumnContainer, ColumnTitle, DeleteButton } from "@frontend/styles";
 import AddNewItem from "./AddNewItem";
-import { useAppState } from "../hooks";
+import { useAppState } from "@frontend/hooks";
 import Card from "./Card";
-import { DragDropContext } from "react-beautiful-dnd";
-import { StrictModeDroppable } from "../utils/StrictModeDroppable";
+import { StrictModeDroppable } from "@frontend/utils/StrictModeDroppable";
 
 
 interface ColumnProp {
@@ -41,7 +40,6 @@ const Column = ({ text, index, id, isDragged }: ColumnProp) => {
                         <Card text={task.text} id={task.id} index={index} />
                     ))} */}
                 </StrictModeDroppable>
-
                 <AddNewItem
                     toggleButtonText="+ Add new task"
                     //! taskId here is Column's id

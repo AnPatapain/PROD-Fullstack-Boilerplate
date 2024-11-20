@@ -14,9 +14,6 @@ interface CardProp {
 const Card = ({ text, id, index, columnId }: CardProp) => {
     const { state, dispatch } = useAppState()
     return (
-        // <CardContainer>
-        //     {text}
-        // </CardContainer>
         <Draggable key={id} draggableId={id} index={index}>
             {
                 (provided, snapshot) => (

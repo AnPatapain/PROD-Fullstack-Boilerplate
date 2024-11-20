@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { AddItemButton } from "../styles";
+import  { useState } from "react";
+import { AddItemButton } from "@frontend/styles";
 import NewItemForm from "./NewItemForm";
 interface AddNewItemProps {
     onAdd(text: string): void

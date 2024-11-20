@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from "react"
 import { v4 as uuid } from "uuid";
 
 import { findItemIndexById, moveItem } from "@frontend/utils"
-import { DragItem } from "@frontend/DTO/DragItem";
+import { type DragItem } from "@frontend/types/DragItem.ts";
 
 interface Task {
     id: string

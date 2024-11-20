@@ -1,8 +1,8 @@
 
 import { DragDropContext } from "react-beautiful-dnd";
 
-import { AppContainer } from './styles';
-import { AddNewItem, DragColumn } from './components';
+import { AppContainer } from '@frontend/styles';
+import { AddNewItem, DragColumn } from '@frontend/components';
 
 import { useAppState } from '@frontend/hooks';
 import { StrictModeDroppable } from '@frontend/utils/StrictModeDroppable';
